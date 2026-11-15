@@ -132,6 +132,11 @@ class Chat(BaseModel):
 def api_chat(body: Chat):
     cfg, store = ctx(body.p, body.lang)
     out = frontdesk.answer(body.text, cfg, store, today())
+    if out.get("stock"):
+        lv = stock.levels(cfg, store, today())
+        out["stock"] = [{"item": item_name(cfg, r["item_key"]), "on_hand": r["on_hand"], "days_left": r["days_left"],
+                         "unit": i18n.unit_word(r["unit"], cfg["owner_language"], r["on_hand"]),
+                         "level": lv.get(r["item_key"], "blue")} for r in out["stock"] if r.get("on_hand") is not None]
     for a in out.get("actions", []):
         for d in a.get("drafts", []):
             d["sms"] = "sms:" + d["phone"] + "?&body=" + __import__("urllib.parse").parse.quote(d["text"])
@@ -151,7 +156,9 @@ def api_sheet(p: str | None = None, limit: int = 40, lang: str | None = None):
         r["cost_per"] = i18n.unit_word(r["cost_per"], lang)
     tot = store.db.execute("select count(distinct invoice_id) n, coalesce(sum(line_total),0) t from lines").fetchone()
     stock_rows = [s for s in (stock.status(it, store, today()) for it in cfg["items"]) if s["on_hand"] is not None]
+    lv = stock.levels(cfg, store, today())
     for s in stock_rows:
+        s["level"] = lv.get(s["item_key"], "blue")
         s["item"] = item_name(cfg, s["item_key"])
         s["unit"] = i18n.unit_word(s["unit"], lang, s["on_hand"])
     return {"business": cfg.get("business"), "language": lang, "rows": rows, "invoices": tot["n"], "total": round(tot["t"], 2),
@@ -189,4 +196,5 @@ def demo_image(profile: str, name: str):
     return FileResponse(path)
 
 
+app.mount("/logo", StaticFiles(directory=ROOT / "logo"), name="logo")
 app.mount("/static", StaticFiles(directory=ROOT / "app" / "static"), name="static")

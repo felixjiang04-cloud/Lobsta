@@ -79,6 +79,24 @@ def reorder(cfg: dict, store, today: date | None = None) -> dict:
     return {"next_delivery": nxt.isoformat(), "lines": lines}
 
 
+def levels(cfg: dict, store, today: date | None = None) -> dict:
+    """Traffic light per counted item: 'red' = won't last until the delivery after next (same rule as
+    reorder), 'yellow' = within 1.5x of that line, 'blue' = fine. Items with no count or no usage: absent."""
+    today = today or date.today()
+    cover_days = (next_delivery(cfg, today, 1) - today).days
+    out = {}
+    for it in cfg.get("items", []):
+        st = status(it, store, today)
+        if st["on_hand"] is None:
+            continue
+        if not st["use_per_day"]:
+            out[it["key"]] = "blue"
+            continue
+        need = st["use_per_day"] * cover_days * (1 + cfg.get("safety_pct", 15) / 100)
+        out[it["key"]] = "red" if st["on_hand"] < need else "yellow" if st["on_hand"] < need * 1.5 else "blue"
+    return out
+
+
 def order_messages(cfg: dict, plan: dict) -> list[dict]:
     """One draft text per supplier, in the supplier's language. Nothing is sent
     by Lobsta: the owner taps the draft and their own phone sends it."""

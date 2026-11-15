@@ -69,6 +69,14 @@ body.started .hello{display:none}
   .chat{border-right:0;display:flex;flex-direction:column;padding:0;overflow:hidden}
   .stream{flex:1;overflow-y:auto;padding:24px}
 }
+.logo{display:block;width:32px;height:32px}
+.lob{width:24px;height:24px;vertical-align:middle;margin-right:8px;flex:none}
+.top{gap:12px}
+.stocklist{list-style:none;margin:8px 0 0;padding:0}
+.stocklist li{display:flex;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.stocklist span{margin-left:auto;color:var(--muted);font-variant-numeric:tabular-nums}
+.alerts li{display:grid;grid-template-columns:32px 1fr;align-items:center}
+.alerts li span{grid-column:2}
 .bellwrap{position:relative}
 .bell{position:relative;flex:0 0 40px;height:40px;border-color:var(--line-strong)}
 .badge{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 4px;background:var(--red);color:var(--bg);font-size:12px;font-weight:600;line-height:18px;text-align:center}
@@ -181,7 +189,7 @@ body.started .hello{display:none}
 </head>
 <body>
 <header class="top">
-  <div class="mark">Lobsta</div>
+  <img class="logo" src="/logo/lobsta_mark.svg" alt="" width="32" height="32"><div class="mark">Lobsta</div>
   <div class="biz" id="biz"></div>
   <div class="seg" id="langs" role="group" aria-label="Language">
     <button data-l="zh" lang="zh">中文</button><button data-l="en" lang="en">EN</button><button data-l="fr" lang="fr">FR</button>
@@ -240,21 +248,21 @@ body.started .hello{display:none}
 
 <script>
 const S = {
- zh:{s1:"进货单",s2:"读到的内容",s3:"前台",snap:"拍进货单",add:"加照片",hello:"今天需要什么？",photoMsg:"进货单照片",low:"快用完了",lowNone:"没有快用完的货。",lowLine:"还剩 {q}，够 {d} 天，建议订 {o}",toast:"有 {n} 样货撑不到 {day} 送货",bell:"提醒",samples:"或者用示例单据",
+ zh:{s1:"进货单",s2:"读到的内容",s3:"前台",snap:"拍进货单",add:"加照片",hello:"今天需要什么？",photoMsg:"进货单照片",low:"快用完了",lowNone:"没有快用完的货。",lowLine:"还剩 {q}，够 {d} 天，建议订 {o}",toast:"有 {n} 样货撑不到 {day} 送货",bell:"提醒",lv:{red:"快用完了",yellow:"快要不够",blue:"够用"},samples:"或者用示例单据",
      how:["拍一张照片。AI 只负责读字。","程序核对每一行的数字，并和你以前的进货价比较。","你点确认之后才会入账。"],
      reading:"正在读单子…",checking:"程序正在核对数字…",confirm:"确认入账",anyway:"知道了，仍然入账",discard:"不要了",
      found:"这张单子多付了",foundSub:"程序算出来的，不是 AI 猜的",date:"日期",no:"单号",by:"读取",sec:"秒",
      item:"货品",qty:"数量",amount:"金额",total:"总计",matched:"对应",which:"选一样货",pick:"这是哪样货？",
      ph:"问一句，或者说：加 5 公斤三文鱼",q:["今天要注意什么？","该订什么？","我买贵了吗？","还剩多少？","这个月花了多少？"],via:{model:"开源模型组织语言，数字由程序核对过",check:"模型改了数字，所以这里显示的是程序的原话"},you:"你",bot:"Lobsta",
      send:"发短信给 ",to:"发给",why:"为什么做 Lobsta",sheet:"账本（投影）",voice:"语音",go:"发送",ask:"问 Lobsta",sample:"示例"},
- en:{s1:"Invoice",s2:"What was read",s3:"Front desk",snap:"Snap an invoice",add:"Add photo",hello:"What do you need today?",photoMsg:"Invoice photo",low:"Running low",lowNone:"Nothing is running low.",lowLine:"{q} left, {d} days. Order {o}",toast:"{n} items run out before the {day} delivery",bell:"Notifications",samples:"Or try a sample invoice",
+ en:{s1:"Invoice",s2:"What was read",s3:"Front desk",snap:"Snap an invoice",add:"Add photo",hello:"What do you need today?",photoMsg:"Invoice photo",low:"Running low",lowNone:"Nothing is running low.",lowLine:"{q} left, {d} days. Order {o}",toast:"{n} items run out before the {day} delivery",bell:"Notifications",lv:{red:"Low: order now",yellow:"Getting low",blue:"Enough"},samples:"Or try a sample invoice",
      how:["Take one photo. The AI only reads the text.","Code checks every line and compares prices with what you paid before.","Nothing is saved until you confirm."],
      reading:"Reading the invoice…",checking:"Checking the numbers…",confirm:"Looks right, save it",anyway:"Noted, save anyway",discard:"Discard",
      found:"Overpaid on this invoice",foundSub:"Worked out by code, not guessed by AI",date:"Date",no:"No.",by:"Read by",sec:"s",
      item:"Item",qty:"Qty",amount:"Amount",total:"Total",matched:"Matched to",which:"Pick an item",pick:"Which item is this?",
      ph:"Ask, or say: add 5 kg salmon",q:["Brief me","What should I order?","Am I overpaying?","What's left?","What did I spend this month?"],via:{model:"Worded by the open model; every number checked by code",check:"The model changed a number, so this is the code's own wording"},you:"You",bot:"Lobsta",
      send:"Text ",to:"To",why:"Why Lobsta",sheet:"The books (projector)",voice:"Voice",go:"Send",ask:"Ask Lobsta",sample:"Sample"},
- fr:{s1:"Facture",s2:"Ce qui a été lu",s3:"Accueil",snap:"Photographier une facture",add:"Ajouter une photo",hello:"De quoi avez-vous besoin ?",photoMsg:"Photo de facture",low:"Bientôt en rupture",lowNone:"Rien ne manque.",lowLine:"reste {q}, {d} jours. Commander {o}",toast:"{n} articles en rupture avant la livraison du {day}",bell:"Notifications",samples:"Ou essayez une facture d'exemple",
+ fr:{s1:"Facture",s2:"Ce qui a été lu",s3:"Accueil",snap:"Photographier une facture",add:"Ajouter une photo",hello:"De quoi avez-vous besoin ?",photoMsg:"Photo de facture",low:"Bientôt en rupture",lowNone:"Rien ne manque.",lowLine:"reste {q}, {d} jours. Commander {o}",toast:"{n} articles en rupture avant la livraison du {day}",bell:"Notifications",lv:{red:"Low: order now",yellow:"Getting low",blue:"Enough"},samples:"Ou essayez une facture d'exemple",
      how:["Une seule photo. L'IA ne fait que lire.","Le code vérifie chaque ligne et compare les prix avec vos achats passés.","Rien n'est enregistré sans votre accord."],
      reading:"Lecture de la facture…",checking:"Vérification des chiffres…",confirm:"C'est bon, enregistrer",anyway:"Noté, enregistrer quand même",discard:"Annuler",
      found:"Payé en trop sur cette facture",foundSub:"Calculé par le code, pas deviné par l'IA",date:"Date",no:"N°",by:"Lu par",sec:" s",
@@ -306,7 +314,7 @@ async function loadAlerts(first){
     const a = await (await fetch("/api/alerts" + qs())).json();
     const n = a.low.length; $("badge").hidden = !n; $("badge").textContent = n;
     $("alerts").innerHTML = `<h4>${esc(L.low)}</h4>` + (n ? `<ul>${a.low.map(l =>
-        `<li><b>${esc(l.item)}</b><span>${esc(L.lowLine.replace("{q}", l.on_hand + " " + l.unit).replace("{d}", l.days_left).replace("{o}", l.order))}</span></li>`).join("")}</ul>`
+        `<li><img class="lob" src="/logo/lobsta_mark_red.svg" alt="" width="24" height="24"><b>${esc(l.item)}</b><span>${esc(L.lowLine.replace("{q}", l.on_hand + " " + l.unit).replace("{d}", l.days_left).replace("{o}", l.order))}</span></li>`).join("")}</ul>`
       + a.drafts.map(d => `<a class="btn sec" href="${esc(d.sms)}">${esc(L.send)}${esc(d.supplier)}</a>`).join("") : `<p>${esc(L.lowNone)}</p>`);
     if (first && n && !toasted) { toasted = true; const t = $("toast");
       t.textContent = L.toast.replace("{n}", n).replace("{day}", a.next_delivery); t.hidden = false;
@@ -445,6 +453,9 @@ async function ask(text){
     const r = await fetch("/api/chat", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({text, p: P || null, lang})});
     const j = await r.json();
     wait.classList.remove("wait"); wait.lastChild.textContent = j.text || j.detail || "?";
+    if (j.stock && j.stock.length) { const ul = document.createElement("ul"); ul.className = "stocklist";
+      ul.innerHTML = j.stock.map(r => `<li><img class="lob" src="/logo/lobsta_mark${r.level === "blue" ? "" : "_" + esc(r.level)}.svg" alt="${esc(L.lv[r.level] || "")}" title="${esc(L.lv[r.level] || "")}" width="24" height="24">${esc(r.item)}<span>${r.on_hand} ${esc(r.unit)}</span></li>`).join("");
+      wait.appendChild(ul); }
     const via = j.via === "model" && j.intent !== "chat" ? L.via.model : j.via === "code-after-check" ? L.via.check : "";
     if (via) { const n = document.createElement("small"); n.className = "via"; n.textContent = via; wait.appendChild(n); }
     (j.actions || []).forEach(a => (a.drafts || []).forEach(d => {
