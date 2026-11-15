@@ -10,10 +10,11 @@ report/
 *.read.json
 service-account*.json
 
-# only the two demo restaurants are public; real restaurants' configs stay private
+# public: the two demo restaurants and one real one shared with permission; other real configs stay private
 configs/*
 !configs/sushi.json
 !configs/hotpot.json
+!configs/ahso.json
 invoice*/
 lobsta_update/
 lobsta_update.zip

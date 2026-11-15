@@ -1,0 +1,39 @@
+{
+  "profile": "ahso",
+  "business": "Ah-So Sushi Gatineau",
+  "owner_language": "zh",
+  "invoice_languages": ["fr", "en"],
+  "usage_source": "voice_count",
+  "delivery_days": ["mon", "tue"],
+  "order_lead_days": 1,
+  "safety_pct": 15,
+  "alerts": {"price_jump_pct": 5, "shrink_pct": 3},
+  "suppliers": [
+    {"name": "JFC International (Canada) Inc.", "phone": "+15143362290", "language": "fr"},
+    {"name": "Aliments Asiatiques Wismettac Inc.", "phone": "+15149200500", "language": "fr"},
+    {"name": "Centennial Food Group", "phone": "+19056958838", "language": "en"},
+    {"name": "Sunwoo Global Inc.", "phone": "+14167415335", "language": "en"}
+  ],
+  "items": [
+    {"key": "salmon_cubes", "name": {"en": "Salmon cubes (frozen)", "fr": "Cubes de saumon", "zh": "三文鱼粒"}, "base_unit": "kg", "supplier": "JFC International (Canada) Inc.", "keywords": ["salmon cubes", "saumon cubes"]},
+    {"key": "salmon", "name": {"en": "Salmon fillet", "fr": "Filet de saumon", "zh": "三文鱼"}, "base_unit": "kg", "supplier": "Centennial Food Group", "keywords": ["salmon", "saumon", "三文鱼"]},
+    {"key": "tempura_shrimp", "name": {"en": "Tempura shrimp", "fr": "Crevettes tempura", "zh": "天妇罗虾"}, "base_unit": "kg", "supplier": "JFC International (Canada) Inc.", "keywords": ["tempura shrimp", "crevette tempura"]},
+    {"key": "unagi", "name": {"en": "Unagi", "fr": "Anguille", "zh": "鳗鱼"}, "base_unit": "kg", "supplier": "JFC International (Canada) Inc.", "keywords": ["unagi", "kabayaki", "eel", "鳗鱼"]},
+    {"key": "seaweed_salad", "name": {"en": "Seaweed salad", "fr": "Salade d'algues", "zh": "海藻沙拉"}, "base_unit": "kg", "supplier": "JFC International (Canada) Inc.", "keywords": ["seaweed salad", "salade algues", "海藻"]},
+    {"key": "rice", "name": {"en": "Rice", "fr": "Riz", "zh": "大米"}, "base_unit": "kg", "supplier": "JFC International (Canada) Inc.", "keywords": ["calrose", "botan rice", "rice", "riz", "大米"]},
+    {"key": "sushi_vinegar", "name": {"en": "Sushi vinegar", "fr": "Vinaigre à sushi", "zh": "寿司醋"}, "base_unit": "l", "supplier": "JFC International (Canada) Inc.", "keywords": ["sushi vinegar", "vinaigre", "寿司醋"]},
+    {"key": "soy_packets", "name": {"en": "Soy sauce packets", "fr": "Sachets de soya", "zh": "酱油包"}, "base_unit": "case", "supplier": "JFC International (Canada) Inc.", "keywords": ["soy sauce packets", "soy sauce take out", "酱油包"]},
+    {"key": "tamari", "name": {"en": "Gluten-free tamari", "fr": "Tamari sans gluten", "zh": "无麸质酱油"}, "base_unit": "l", "supplier": "JFC International (Canada) Inc.", "keywords": ["tamari"]},
+    {"key": "sriracha", "name": {"en": "Sriracha", "fr": "Sriracha", "zh": "是拉差辣酱"}, "base_unit": "ea", "supplier": "JFC International (Canada) Inc.", "keywords": ["sriracha"]},
+    {"key": "ramen_base", "name": {"en": "Tonkotsu ramen base", "fr": "Base ramen tonkotsu", "zh": "豚骨拉面汤底"}, "base_unit": "kg", "supplier": "JFC International (Canada) Inc.", "keywords": ["ramen base", "tonkotsu"]},
+    {"key": "nori", "name": {"en": "Nori", "fr": "Nori", "zh": "海苔"}, "base_unit": "case", "supplier": "Aliments Asiatiques Wismettac Inc.", "keywords": ["nori", "海苔"]},
+    {"key": "sesame", "name": {"en": "Sesame seeds", "fr": "Graines de sésame", "zh": "芝麻"}, "base_unit": "kg", "supplier": "Aliments Asiatiques Wismettac Inc.", "keywords": ["sesame seed", "sesame", "sésame", "芝麻"]},
+    {"key": "crab", "name": {"en": "Imitation crab", "fr": "Goberge", "zh": "蟹柳"}, "base_unit": "kg", "supplier": "Aliments Asiatiques Wismettac Inc.", "keywords": ["imitation crab", "crab meat", "crab stick", "goberge", "蟹柳"]},
+    {"key": "tenkasu", "name": {"en": "Tenkasu", "fr": "Tenkasu", "zh": "天妇罗碎"}, "base_unit": "kg", "supplier": "Aliments Asiatiques Wismettac Inc.", "keywords": ["tenkasu"]},
+    {"key": "pocky", "name": {"en": "Pocky", "fr": "Pocky", "zh": "百奇"}, "base_unit": "ea", "supplier": "Aliments Asiatiques Wismettac Inc.", "keywords": ["pocky"]},
+    {"key": "donburi_bowl", "name": {"en": "Donburi bowls", "fr": "Bols donburi", "zh": "丼饭碗"}, "base_unit": "case", "supplier": "Aliments Asiatiques Wismettac Inc.", "keywords": ["red body"]},
+    {"key": "donburi_lid", "name": {"en": "Donburi lids", "fr": "Couvercles donburi", "zh": "丼饭碗盖"}, "base_unit": "case", "supplier": "Aliments Asiatiques Wismettac Inc.", "keywords": ["pet clear lid", "clear lid"]},
+    {"key": "deli_containers", "name": {"en": "Deli containers", "fr": "Contenants", "zh": "外卖盒"}, "base_unit": "case", "supplier": "Sunwoo Global Inc.", "keywords": ["sl-h10s", "sl-h15s", "hinged deli", "deli container"]},
+    {"key": "chopsticks", "name": {"en": "Chopsticks", "fr": "Baguettes", "zh": "筷子"}, "base_unit": "case", "supplier": "Sunwoo Global Inc.", "keywords": ["chopsticks", "chosticks", "bamboo", "筷子"]}
+  ]
+}
