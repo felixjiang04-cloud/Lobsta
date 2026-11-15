@@ -19,3 +19,7 @@ invoice*/
 lobsta_update/
 lobsta_update.zip
 *.zip
+
+# local-only demo assets (other vendors' screenshots)
+app/static/private/
+app/static/demo.html
