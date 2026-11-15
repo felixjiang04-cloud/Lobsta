@@ -166,6 +166,23 @@ class Tools:
                               "unit": self.cfg["items_by_key"][c["item_key"]].get("base_unit", "kg")})
         return {"saved": saved}
 
+    def adjust_stock(self, changes: list[dict], sign: int) -> dict:
+        """'add 34 tomatoes' / 'used 5 kg salmon': on hand goes up or down by that much.
+        Code reads the current figure and writes the new count; the model never writes."""
+        done = []
+        for c in changes:
+            it = self.cfg["items_by_key"].get(c.get("item_key"))
+            if not it:
+                continue
+            before = stock.status(it, self.store, self.today)["on_hand"] or 0
+            now = round(max(0, before + sign * float(c["qty"])), 2)
+            # a count is "what was there at that moment", so store it net of today's receipts
+            got_today = self.store.received(it["key"], self.today.isoformat(), self.today.isoformat())
+            self.store.add_count(it["key"], round(now - got_today, 2), self.today.isoformat())
+            now = stock.status(it, self.store, self.today)["on_hand"]
+            done.append({"item_key": it["key"], "qty": float(c["qty"]), "now": now, "unit": it.get("base_unit", "kg")})
+        return {"changed": done, "sign": sign}
+
     def get_reorder_plan(self) -> dict:
         plan = stock.reorder(self.cfg, self.store, self.today)
         drafts = stock.order_messages(self.cfg, plan)
@@ -202,6 +219,10 @@ _INTENTS = [
 ]
 
 
+_ADD = re.compile(r"\b(add|added|received|got|plus|ajoute[rz]?|ajouté|reçu)\b|加|进了|到了|收到|多了", re.I)
+_USE = re.compile(r"\b(used|use up|remove|removed|minus|threw|wasted|utilisé|enlève|retire|jeté)\b|用了|用掉|扔了|减|少了", re.I)
+
+
 def answer_rules(text: str, cfg: dict, store, today: date | None = None, intent: str | None = None,
                  key: str | None = None) -> dict:
     """Code-written answers. `intent` (and `key`) can be forced by a model that only chose the tool."""
@@ -211,6 +232,14 @@ def answer_rules(text: str, cfg: dict, store, today: date | None = None, intent:
     name = lambda k: item_name(cfg, k, lang)
     uw = lambda u, q=None: i18n.unit_word(u, lang, q)
     forced = intent is not None
+    sign = 1 if _ADD.search(low) else -1 if _USE.search(low) else 0
+    if sign and intent in (None, "count", "help", "stock", "reorder"):
+        changes = parse_counts(text, cfg)
+        if changes:
+            done = tools.adjust_stock(changes, sign)["changed"]
+            lines = [i18n.t(lang, "adj_line", item=name(d["item_key"]), sign="+" if sign > 0 else "-", qty=d["qty"],
+                            unit=uw(d["unit"], d["qty"]), now=d["now"], unit_now=uw(d["unit"], d["now"])) for d in done]
+            return {"text": "\n".join(lines), "actions": [], "intent": "adjust", "changed": done}
     if not forced:
         intent = next((n for n, kws in _INTENTS if any(k in low for k in kws)), None)
     if intent in (None, "count", "help"):

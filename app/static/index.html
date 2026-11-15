@@ -20,7 +20,7 @@
 *,*::before,*::after{box-sizing:border-box;border-radius:0 !important}
 html,body{margin:0}
 body{background:var(--bg);color:var(--fg);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased;
-  padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+  padding-bottom:calc(132px + env(safe-area-inset-bottom))}
 h1,h2,h3{font-family:var(--head);font-weight:600;line-height:1.15;margin:0;text-wrap:balance}
 p{margin:0;max-width:65ch;text-wrap:pretty}
 a{color:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
@@ -51,12 +51,36 @@ main{display:grid;grid-template-columns:1fr}
 .step{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
 .step span{font-family:var(--head);font-size:14px;color:var(--orange-ink);border:1px solid var(--orange);background:var(--surface);min-width:24px;height:24px;display:inline-grid;place-items:center}
 .step h2{font-size:20px}
+.sideh{font-size:14px;font-family:var(--body);font-weight:400;color:var(--muted);margin-bottom:8px}
+.inner{max-width:760px;margin:0 auto;width:100%}
+.chat{padding:0;border-bottom:0}
+.stream{padding:24px 16px}
+.hello{padding:48px 0 24px;display:grid;gap:24px;justify-items:start}
+.hello h3{font-size:28px;letter-spacing:-.02em}
+@media (min-width:700px){.hello h3{font-size:40px}}
+.hello #how{width:100%}
+.btn.big{height:64px;padding:0 32px;font-size:20px}
+.btn.big svg{width:24px;height:24px}
+body.started .hello{display:none}
 @media (min-width:1024px){
   body{padding-bottom:0}
-  main{grid-template-columns:minmax(260px,3fr) minmax(0,5fr) minmax(300px,4fr);height:calc(100dvh - var(--hdr))}
+  main{grid-template-columns:minmax(220px,280px) minmax(0,1fr);height:calc(100dvh - var(--hdr))}
   .col{border-bottom:0;border-right:1px solid var(--line);overflow-y:auto;padding:24px}
-  .col:last-child{border-right:0;display:flex;flex-direction:column;padding-bottom:0}
+  .chat{border-right:0;display:flex;flex-direction:column;padding:0;overflow:hidden}
+  .stream{flex:1;overflow-y:auto;padding:24px}
 }
+.bellwrap{position:relative}
+.bell{position:relative;flex:0 0 40px;height:40px;border-color:var(--line-strong)}
+.badge{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 4px;background:var(--red);color:var(--bg);font-size:12px;font-weight:600;line-height:18px;text-align:center}
+.alerts{position:absolute;right:0;top:48px;z-index:20;width:min(360px,calc(100vw - 32px));background:var(--bg);border:1px solid var(--fg);padding:16px}
+.alerts h4{margin:0 0 8px;font:600 16px/1.2 var(--head)}
+.alerts ul{list-style:none;margin:0 0 16px;padding:0}
+.alerts li{padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+.alerts li b{font-weight:600}
+.alerts li span{display:block;color:var(--muted);font-size:13px}
+.alerts .btn{width:100%;margin-top:8px;font-size:15px;white-space:normal;height:auto;min-height:44px;padding:8px 16px}
+.toast{position:fixed;top:80px;right:16px;z-index:30;max-width:320px;background:var(--fg);color:var(--bg);padding:12px 16px;cursor:pointer;border-left:4px solid var(--orange)}
+@media (prefers-reduced-motion:no-preference){.toast{animation:land .3s var(--ease) both}}
 
 /* buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 20px;border:1px solid var(--fg);
@@ -71,11 +95,9 @@ main{display:grid;grid-template-columns:1fr}
 
 /* column 1: the photo */
 .snap{width:100%;height:56px;font-size:16px}
-body.pending .snap{background:transparent;color:var(--fg)}
-body.pending .snap:hover{background:var(--fg);color:var(--bg)}
 .samples{margin-top:24px}
 .samples p{font-size:14px;margin-bottom:8px}
-.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:360px}
 .thumbs button{padding:0;border:1px solid var(--line);background:var(--surface);cursor:pointer;aspect-ratio:3/4;overflow:hidden;
   transition:border-color .15s var(--ease)}
 .thumbs button:hover{border-color:var(--fg)}
@@ -124,12 +146,11 @@ body.pending .snap:hover{background:var(--fg);color:var(--bg)}
 .fail{padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--red-ink)}
 
 /* column 3: front desk */
-.quick{display:flex;flex-direction:column;border-top:1px solid var(--line)}
-.quick button{text-align:left;min-height:44px;padding:10px 0;border:0;border-bottom:1px solid var(--line);background:none;cursor:pointer;
-  text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:4px;
-  transition:text-decoration-color .15s var(--ease)}
-.quick button:hover{text-decoration-color:var(--fg)}
-.log{margin-top:24px;flex:1}
+.quick{display:flex;gap:8px;overflow-x:auto;padding-bottom:12px}
+.quick button{flex:0 0 auto;height:36px;padding:0 12px;border:1px solid var(--line-strong);background:var(--bg);cursor:pointer;font-size:14px;white-space:nowrap;
+  transition:border-color .15s var(--ease),background-color .15s var(--ease)}
+.quick button:hover{border-color:var(--fg);background:var(--surface)}
+.log #result{padding:16px 0 8px;border-top:1px solid var(--line)}
 .msg{padding:12px 0;border-top:1px solid var(--line);white-space:pre-wrap;word-break:break-word}
 .msg b{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:2px}
 .msg.me{color:var(--muted)}
@@ -139,10 +160,13 @@ body.pending .snap:hover{background:var(--fg);color:var(--bg)}
 .draft .to{font-size:13px;color:var(--muted)}
 .draft pre{font:inherit;white-space:pre-wrap;margin:8px 0 16px}
 .draft .btn{width:100%}
-.ask{position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:1px solid var(--line);
+.ask{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--bg);border-top:1px solid var(--line);
   padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
 .ask .in{display:flex;gap:8px}
-@media (min-width:1024px){.ask{position:sticky;margin:24px -24px 0;padding:16px 24px}}
+.ask .addphoto{padding:0 16px;flex:none}
+@media (max-width:520px){.ask .addphoto span{display:none}.ask .addphoto{padding:0;width:44px}}
+@media (min-width:1024px){.ask{position:static;padding:12px 24px 16px}}
+.icon.solid{background:var(--fg);color:var(--bg)}.icon.solid:hover{background:transparent;color:var(--fg)}
 .ask input{flex:1;min-width:0;height:44px;padding:0 12px;border:1px solid var(--line-strong);background:var(--bg);
   transition:border-color .15s var(--ease)}
 .ask input:hover{border-color:var(--fg)}
@@ -164,66 +188,78 @@ body.pending .snap:hover{background:var(--fg);color:var(--bg)}
   </div>
   <label class="sr" for="profile">Restaurant</label>
   <select id="profile"></select>
+  <div class="bellwrap">
+    <button type="button" class="icon bell" id="bell" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M6 17V10a6 6 0 0 1 12 0v7M4 17h16M10 20h4"/></svg>
+      <span class="badge" id="badge" hidden></span>
+    </button>
+    <div class="alerts" id="alerts" hidden></div>
+  </div>
   <a id="whyLink" href="/intro"></a>
   <a id="sheetLink" target="_blank"></a>
 </header>
 
 <main>
-  <section class="col" aria-labelledby="h1">
-    <div class="step"><span>1</span><h2 id="h1"></h2></div>
-    <button class="btn snap" id="snap">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="4"/></svg>
-      <span id="snapLabel"></span>
-    </button>
-    <input type="file" id="file" accept="image/*" capture="environment" hidden>
-    <div class="samples"><p class="muted" id="samplesLabel"></p><div class="thumbs" id="demos"></div></div>
+  <section class="col side" aria-labelledby="h1">
+    <h2 id="h1" class="sideh"></h2>
+    <div class="thumbs" id="demos"></div>
     <figure class="photo" id="photo" hidden><img id="photoImg" alt=""></figure>
+    <input type="file" id="file" accept="image/*" capture="environment" hidden>
   </section>
 
-  <section class="col" aria-labelledby="h2" aria-live="polite">
-    <div class="step"><span>2</span><h2 id="h2"></h2></div>
-    <div id="result"></div>
-  </section>
-
-  <section class="col" aria-labelledby="h3">
-    <div class="step"><span>3</span><h2 id="h3"></h2></div>
-    <div class="quick" id="quick"></div>
-    <div class="log" id="log" aria-live="polite"></div>
-    <form class="ask" id="askForm"><div class="in">
-      <button type="button" class="icon" id="mic" hidden>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M9 3h6v11H9zM5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
-      </button>
-      <label class="sr" for="text" id="textLabel"></label>
-      <input id="text" autocomplete="off" enterkeyhint="send">
-      <button class="icon" id="send">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
-      </button>
-    </div></form>
+  <section class="col chat" aria-labelledby="h3">
+    <h2 id="h3" class="sr"></h2>
+    <div class="stream" id="stream">
+      <div class="inner">
+        <div class="hello" id="hello">
+          <h3 id="helloTitle"></h3>
+          <button type="button" class="btn big addphoto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="4"/></svg><span class="addLabel"></span></button>
+          <div id="how"></div>
+        </div>
+        <div class="log" id="log" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="ask"><div class="inner">
+      <div class="quick" id="quick"></div>
+      <form class="in" id="askForm">
+        <button type="button" class="btn sec addphoto" id="snap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="4"/></svg><span class="addLabel"></span></button>
+        <button type="button" class="icon" id="mic" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M9 3h6v11H9zM5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+        </button>
+        <label class="sr" for="text" id="textLabel"></label>
+        <input id="text" autocomplete="off" enterkeyhint="send">
+        <button class="icon solid" id="send">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+        </button>
+      </form>
+    </div></div>
   </section>
 </main>
+<div id="result" hidden></div>
+<div class="toast" id="toast" role="status" hidden></div>
 
 <script>
 const S = {
- zh:{s1:"进货单",s2:"读到的内容",s3:"前台",snap:"拍进货单",samples:"或者用示例单据",
+ zh:{s1:"进货单",s2:"读到的内容",s3:"前台",snap:"拍进货单",add:"加照片",hello:"今天需要什么？",photoMsg:"进货单照片",low:"快用完了",lowNone:"没有快用完的货。",lowLine:"还剩 {q}，够 {d} 天，建议订 {o}",toast:"有 {n} 样货撑不到 {day} 送货",bell:"提醒",samples:"或者用示例单据",
      how:["拍一张照片。AI 只负责读字。","程序核对每一行的数字，并和你以前的进货价比较。","你点确认之后才会入账。"],
      reading:"正在读单子…",checking:"程序正在核对数字…",confirm:"确认入账",anyway:"知道了，仍然入账",discard:"不要了",
      found:"这张单子多付了",foundSub:"程序算出来的，不是 AI 猜的",date:"日期",no:"单号",by:"读取",sec:"秒",
      item:"货品",qty:"数量",amount:"金额",total:"总计",matched:"对应",which:"选一样货",pick:"这是哪样货？",
-     ph:"还剩多少？/ 三文鱼剩八公斤",q:["今天要注意什么？","该订什么？","我买贵了吗？","还剩多少？","这个月花了多少？"],via:{model:"开源模型组织语言，数字由程序核对过",check:"模型改了数字，所以这里显示的是程序的原话"},you:"你",bot:"Lobsta",
+     ph:"问一句，或者说：加 5 公斤三文鱼",q:["今天要注意什么？","该订什么？","我买贵了吗？","还剩多少？","这个月花了多少？"],via:{model:"开源模型组织语言，数字由程序核对过",check:"模型改了数字，所以这里显示的是程序的原话"},you:"你",bot:"Lobsta",
      send:"发短信给 ",to:"发给",why:"为什么做 Lobsta",sheet:"账本（投影）",voice:"语音",go:"发送",ask:"问 Lobsta",sample:"示例"},
- en:{s1:"Invoice",s2:"What was read",s3:"Front desk",snap:"Snap an invoice",samples:"Or try a sample invoice",
+ en:{s1:"Invoice",s2:"What was read",s3:"Front desk",snap:"Snap an invoice",add:"Add photo",hello:"What do you need today?",photoMsg:"Invoice photo",low:"Running low",lowNone:"Nothing is running low.",lowLine:"{q} left, {d} days. Order {o}",toast:"{n} items run out before the {day} delivery",bell:"Notifications",samples:"Or try a sample invoice",
      how:["Take one photo. The AI only reads the text.","Code checks every line and compares prices with what you paid before.","Nothing is saved until you confirm."],
      reading:"Reading the invoice…",checking:"Checking the numbers…",confirm:"Looks right, save it",anyway:"Noted, save anyway",discard:"Discard",
      found:"Overpaid on this invoice",foundSub:"Worked out by code, not guessed by AI",date:"Date",no:"No.",by:"Read by",sec:"s",
      item:"Item",qty:"Qty",amount:"Amount",total:"Total",matched:"Matched to",which:"Pick an item",pick:"Which item is this?",
-     ph:"What's left? / salmon 8 kg",q:["Brief me","What should I order?","Am I overpaying?","What's left?","What did I spend this month?"],via:{model:"Worded by the open model; every number checked by code",check:"The model changed a number, so this is the code's own wording"},you:"You",bot:"Lobsta",
+     ph:"Ask, or say: add 5 kg salmon",q:["Brief me","What should I order?","Am I overpaying?","What's left?","What did I spend this month?"],via:{model:"Worded by the open model; every number checked by code",check:"The model changed a number, so this is the code's own wording"},you:"You",bot:"Lobsta",
      send:"Text ",to:"To",why:"Why Lobsta",sheet:"The books (projector)",voice:"Voice",go:"Send",ask:"Ask Lobsta",sample:"Sample"},
- fr:{s1:"Facture",s2:"Ce qui a été lu",s3:"Accueil",snap:"Photographier une facture",samples:"Ou essayez une facture d'exemple",
+ fr:{s1:"Facture",s2:"Ce qui a été lu",s3:"Accueil",snap:"Photographier une facture",add:"Ajouter une photo",hello:"De quoi avez-vous besoin ?",photoMsg:"Photo de facture",low:"Bientôt en rupture",lowNone:"Rien ne manque.",lowLine:"reste {q}, {d} jours. Commander {o}",toast:"{n} articles en rupture avant la livraison du {day}",bell:"Notifications",samples:"Ou essayez une facture d'exemple",
      how:["Une seule photo. L'IA ne fait que lire.","Le code vérifie chaque ligne et compare les prix avec vos achats passés.","Rien n'est enregistré sans votre accord."],
      reading:"Lecture de la facture…",checking:"Vérification des chiffres…",confirm:"C'est bon, enregistrer",anyway:"Noté, enregistrer quand même",discard:"Annuler",
      found:"Payé en trop sur cette facture",foundSub:"Calculé par le code, pas deviné par l'IA",date:"Date",no:"N°",by:"Lu par",sec:" s",
      item:"Article",qty:"Qté",amount:"Montant",total:"Total",matched:"Associé à",which:"Choisir un article",pick:"C'est quel article ?",
-     ph:"Il reste combien ? / saumon 8 kg",q:["Résumé du jour","Quoi commander ?","Est-ce que je paie trop cher ?","Il reste combien ?","Combien dépensé ce mois-ci ?"],via:{model:"Formulé par le modèle ouvert ; chaque chiffre vérifié par le code",check:"Le modèle a changé un chiffre : voici la version du code"},you:"Vous",bot:"Lobsta",
+     ph:"Demandez, ou dites : ajoute 5 kg saumon",q:["Résumé du jour","Quoi commander ?","Est-ce que je paie trop cher ?","Il reste combien ?","Combien dépensé ce mois-ci ?"],via:{model:"Formulé par le modèle ouvert ; chaque chiffre vérifié par le code",check:"Le modèle a changé un chiffre : voici la version du code"},you:"Vous",bot:"Lobsta",
      send:"Texter ",to:"À",why:"Pourquoi Lobsta",sheet:"Les livres (projecteur)",voice:"Voix",go:"Envoyer",ask:"Demander à Lobsta",sample:"Exemple"}
 };
 const $ = id => document.getElementById(id);
@@ -243,8 +279,10 @@ async function load(){
   document.documentElement.lang = lang === "zh" ? "zh-CN" : lang;
   $("biz").textContent = cfg.business || "";
   document.querySelectorAll("#langs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.l === lang));
-  $("h1").textContent = L.s1; $("h2").textContent = L.s2; $("h3").textContent = L.s3;
-  $("snapLabel").textContent = L.snap; $("samplesLabel").textContent = L.samples;
+  $("h1").textContent = L.sample; $("h3").textContent = L.s3;
+  $("helloTitle").textContent = L.hello; $("bell").setAttribute("aria-label", L.bell);
+  document.querySelectorAll(".addLabel").forEach(e => e.textContent = L.add);
+  $("how").innerHTML = `<ol class="how">${L.how.map((t, i) => `<li><b>${i+1}</b><span>${esc(t)}</span></li>`).join("")}</ol>`;
   $("text").placeholder = L.ph; $("textLabel").textContent = L.ask;
   $("mic").setAttribute("aria-label", L.voice); $("send").setAttribute("aria-label", L.go);
   $("sheetLink").textContent = L.sheet; $("whyLink").textContent = L.why;
@@ -254,12 +292,31 @@ async function load(){
     `<button data-n="${esc(n)}" aria-label="${esc(L.sample)} ${i+1}"><img alt="" src="/demo-image/${cfg.profile}/${esc(n)}" width="96" height="128"></button>`).join("");
   $("quick").innerHTML = L.q.map(t => `<button type="button">${esc(t)}</button>`).join("");
   if (!current) empty();
-  setupMic();
+  setupMic(); loadAlerts(true);
 }
 function empty(){
   document.body.classList.remove("pending");
-  $("result").innerHTML = `<ol class="how">${L.how.map((t, i) => `<li><b>${i+1}</b><span>${esc(t)}</span></li>`).join("")}</ol>`;
+  $("result").innerHTML = ""; $("result").hidden = true;
 }
+function toEnd(el){ $("log").appendChild(el); document.body.classList.add("started"); el.scrollIntoView({behavior:"smooth", block:"nearest"}); }
+
+let toasted = false;
+async function loadAlerts(first){
+  try {
+    const a = await (await fetch("/api/alerts" + qs())).json();
+    const n = a.low.length; $("badge").hidden = !n; $("badge").textContent = n;
+    $("alerts").innerHTML = `<h4>${esc(L.low)}</h4>` + (n ? `<ul>${a.low.map(l =>
+        `<li><b>${esc(l.item)}</b><span>${esc(L.lowLine.replace("{q}", l.on_hand + " " + l.unit).replace("{d}", l.days_left).replace("{o}", l.order))}</span></li>`).join("")}</ul>`
+      + a.drafts.map(d => `<a class="btn sec" href="${esc(d.sms)}">${esc(L.send)}${esc(d.supplier)}</a>`).join("") : `<p>${esc(L.lowNone)}</p>`);
+    if (first && n && !toasted) { toasted = true; const t = $("toast");
+      t.textContent = L.toast.replace("{n}", n).replace("{day}", a.next_delivery); t.hidden = false;
+      t.onclick = () => { t.hidden = true; openBell(true); }; setTimeout(() => t.hidden = true, 7000); }
+  } catch (_) {}
+}
+function openBell(on){ $("alerts").hidden = !on; $("bell").setAttribute("aria-expanded", on); }
+$("bell").onclick = e => { e.stopPropagation(); openBell($("alerts").hidden); };
+document.addEventListener("click", e => { if (!e.target.closest(".bellwrap") && !e.target.closest("#toast")) openBell(false); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") openBell(false); });
 
 $("langs").onclick = async e => {
   const b = e.target.closest("button"); if (!b || b.dataset.l === lang) return;
@@ -272,7 +329,7 @@ $("langs").onclick = async e => {
 $("profile").onchange = e => { const u = new URL(location); u.searchParams.set("p", e.target.value); location = u; };
 $("demos").onclick = e => { const b = e.target.closest("button"); if (b) sendInvoice(null, b.dataset.n); };
 $("quick").onclick = e => { if (e.target.tagName === "BUTTON") ask(e.target.textContent); };
-$("snap").onclick = () => $("file").click();
+document.querySelectorAll(".addphoto").forEach(b => b.onclick = () => $("file").click());
 $("file").onchange = e => { if (e.target.files[0]) sendInvoice(e.target.files[0]); e.target.value = ""; };
 
 function showPhoto(src, demo){
@@ -283,9 +340,10 @@ function showPhoto(src, demo){
 async function sendInvoice(file, demo){
   lastDemo = demo || null;
   showPhoto(demo ? `/demo-image/${cfg.profile}/${demo}` : URL.createObjectURL(file), demo);
-  const box = $("result");
+  const box = $("result"); box.hidden = false;
+  line(L.photoMsg, "me"); toEnd(box);
   box.innerHTML = `<div class="loading"><p id="stage">${esc(L.reading)}</p><div class="track"><i></i></div></div>`;
-  if (innerWidth < 1024) box.scrollIntoView({behavior:"smooth", block:"start"});
+  box.scrollIntoView({behavior:"smooth", block:"start"});
   const t = setTimeout(() => { const s = $("stage"); if (s) s.textContent = L.checking; }, 1800);
   const fd = new FormData();
   if (P) fd.append("p", P);
@@ -295,7 +353,7 @@ async function sendInvoice(file, demo){
     const r = await fetch("/api/invoice", {method:"POST", body:fd});
     const j = await r.json();
     if (!r.ok) throw new Error(j.detail || r.statusText);
-    current = j; renderInvoice(j);
+    current = j; renderInvoice(j); box.scrollIntoView({behavior:"smooth", block:"start"});
   } catch (err) {
     current = null; document.body.classList.remove("pending");
     box.innerHTML = `<p class="fail">${esc(err.message)}</p>`;
@@ -367,7 +425,9 @@ async function confirmInvoice(){
     const r = await fetch(`/api/invoice/${current.id}/confirm`, {method:"POST", headers:{"Content-Type":"application/json"},
       body: JSON.stringify({item_keys: keys, p: P || null, lang})});
     const j = await r.json();
-    $("result").innerHTML = `<p class="${r.ok ? "saved" : "fail"}">${esc(j.text || j.detail)}</p>`;
+    $("result").innerHTML = ""; $("result").hidden = true;
+    const d = line(j.text || j.detail, "bot"); if (r.ok) d.lastChild.style.color = "var(--ok)";
+    loadAlerts();
   } catch (err) { $("result").innerHTML = `<p class="fail">${esc(err.message)}</p>`; }
   current = null; lastDemo = null; document.body.classList.remove("pending");
 }
@@ -375,8 +435,7 @@ async function confirmInvoice(){
 function line(text, who){
   const d = document.createElement("div"); d.className = "msg " + who;
   d.innerHTML = `<b>${esc(who === "me" ? L.you : L.bot)}</b><span></span>`;
-  d.lastChild.textContent = text; $("log").appendChild(d);
-  d.scrollIntoView({behavior:"smooth", block:"nearest"}); return d;
+  d.lastChild.textContent = text; toEnd(d); return d;
 }
 async function ask(text){
   text = (text || "").trim(); if (!text) return;
@@ -391,8 +450,9 @@ async function ask(text){
     (j.actions || []).forEach(a => (a.drafts || []).forEach(d => {
       const el = document.createElement("div"); el.className = "draft";
       el.innerHTML = `<div class="to">${esc(L.to)} ${esc(d.supplier)}, ${esc(d.phone)}</div><pre>${esc(d.text)}</pre><a class="btn sec" href="${esc(d.sms)}">${esc(L.send)}${esc(d.supplier)}</a>`;
-      $("log").appendChild(el); el.scrollIntoView({behavior:"smooth", block:"nearest"});
+      toEnd(el);
     }));
+    if (["adjust", "count"].includes(j.intent)) loadAlerts();
   } catch (err) { wait.lastChild.textContent = String(err.message || err); }
 }
 $("askForm").onsubmit = e => { e.preventDefault(); ask($("text").value); };

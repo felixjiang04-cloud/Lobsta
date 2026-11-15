@@ -159,6 +159,20 @@ def api_sheet(p: str | None = None, limit: int = 40, lang: str | None = None):
                                               if os.environ.get("LOBSTA_SHEET_ID") else None)}
 
 
+@app.get("/api/alerts")
+def api_alerts(p: str | None = None, lang: str | None = None):
+    """Low stock for the notification bell: items that run out before the next delivery, with order drafts."""
+    cfg, store = ctx(p, lang)
+    L = cfg["owner_language"]
+    plan = stock.reorder(cfg, store, today())
+    drafts = stock.order_messages(cfg, plan)
+    for d in drafts:
+        d["sms"] = "sms:" + d["phone"] + "?&body=" + __import__("urllib.parse").parse.quote(d["text"])
+    low = [{"item": item_name(cfg, l["item_key"]), "on_hand": l["on_hand"], "unit": i18n.unit_word(l["unit"], L, l["on_hand"]),
+            "days_left": l["days_left"], "order": i18n.order_text(l, L)} for l in plan["lines"]]
+    return {"next_delivery": plan["next_delivery"], "low": low, "drafts": drafts}
+
+
 @app.post("/api/reset")
 def api_reset(p: str | None = None):
     """Demo helper: wipe this restaurant's data and reload the demo history."""

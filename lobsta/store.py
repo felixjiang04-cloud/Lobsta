@@ -150,7 +150,7 @@ class Store:
 
     def counts(self, item_key: str, limit: int = 8) -> list[dict]:
         return [dict(r) for r in self.db.execute(
-            "select date, qty from counts where item_key=? order by date desc, created desc limit ?",
+            "select date, qty from counts where item_key=? order by date desc, created desc, rowid desc limit ?",
             (item_key, limit))]
 
     def received(self, item_key: str, after: str, upto: str) -> float:
