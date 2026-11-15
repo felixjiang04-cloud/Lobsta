@@ -458,6 +458,8 @@ def answer_local(text: str, cfg: dict, store, today: date | None = None, chat=ll
     base = answer_rules(text, cfg, store, today, intent=route, key=key)      # numbers come from here
     if base["intent"] in ("help", "count") or len(base["text"]) < 12:
         return {**base, "via": "code"}
+    if base["intent"] == "compare":      # keep the code's wording: it carries the "simulated data" notice and exact figures
+        return {**base, "via": "code"}
     try:
         reply = chat([{"role": "system", "content":
                        f"You are the front desk of Lobsta, a secretary for {cfg.get('business', 'a small restaurant')}. "
