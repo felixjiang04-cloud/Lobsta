@@ -22,4 +22,4 @@ lobsta_update.zip
 
 # local-only demo assets (other vendors' screenshots)
 app/static/private/
-app/static/demo.html
+app/static/demo*.html

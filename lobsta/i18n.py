@@ -33,7 +33,7 @@ T = {
  "cmp_head": "Compared with {shops} shops in {area}{sim}:", "cmp_sim": " (simulated data for this demo)",
  "cmp_line": "{item}: you pay {mine}/{per}, the median is {median}/{per} ({pct}%).",
  "cmp_high": " Higher than 3 in 4 shops.", "cmp_low": " Lower than 3 in 4 shops.", "cmp_none": "I don't have prices from other shops for that yet.",
- "brief_order": "{n} items will run out before the next delivery ({day}): {items}.", "brief_order_none": "Stock covers you until the next delivery.",
+ "brief_order": "Running out before the next delivery ({day}): {items}.", "brief_order_none": "Stock covers you until the next delivery.",
  "brief_flags": "Problems on this week's invoices, worth {total}:", "brief_flags_none": "No problems on this week's invoices.",
  "brief_spend": "Spent this week: {this}. Last week: {last}.",
 },
