@@ -53,6 +53,11 @@ def index():
     return FileResponse(ROOT / "app" / "static" / "index.html")
 
 
+@app.get("/intro")
+def intro_page():
+    return FileResponse(ROOT / "app" / "static" / "intro.html")
+
+
 @app.get("/sheet")
 def sheet_page():
     return FileResponse(ROOT / "app" / "static" / "sheet.html")

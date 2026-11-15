@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why Lobsta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Schibsted+Grotesk:wght@600&display=swap">
+<style>
+:root{
+  --bg:#FFF8F0; --surface:#FDEBD6; --fg:#151513; --muted:#62574B; --line:#EDD9C2; --line-strong:#CDB496;
+  --orange:#F28C28; --orange-ink:#A85400; --red:#B8321A;
+  --body:"IBM Plex Sans","PingFang SC","Microsoft YaHei",sans-serif;
+  --head:"Schibsted Grotesk","IBM Plex Sans",sans-serif;
+  --ease:cubic-bezier(.2,0,0,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+.page,.page *,.page *::before,.page *::after{border-radius:0}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--head);font-weight:600;line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0;max-width:65ch;text-wrap:pretty}
+a{color:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+:focus-visible{outline:2px solid var(--orange-ink);outline-offset:2px}
+.top{border-top:4px solid var(--orange);display:flex;align-items:center;gap:16px;padding:12px 24px;border-bottom:1px solid var(--line)}
+.mark{font-family:var(--head);font-weight:600;font-size:20px;flex:1}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.hero{padding:64px 0 48px;display:grid;gap:24px}
+.hero h1{font-size:40px;letter-spacing:-.02em;max-width:22ch}
+@media (min-width:900px){.hero h1{font-size:56px}}
+.hero p{font-size:20px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 20px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);
+  font-weight:600;text-decoration:none;cursor:pointer;font:600 16px/1 var(--body);transition:background-color .15s var(--ease),color .15s var(--ease),transform .12s var(--ease)}
+.btn:hover{background:transparent;color:var(--fg)}.btn:active{transform:translateY(1px)}
+.split{display:grid;grid-template-columns:1fr;border-top:1px solid var(--fg)}
+@media (min-width:1000px){.split{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}.split>section+section{border-left:1px solid var(--line)}}
+.split>section{padding:32px 0 64px}
+@media (min-width:1000px){.split>section:first-child{padding-right:32px}.split>section:last-child{padding-left:32px}}
+.tag{font-size:14px;color:var(--orange-ink);margin-bottom:8px}
+.split h2{font-size:28px;letter-spacing:-.02em;margin-bottom:8px}
+.sub{color:var(--muted);margin-bottom:24px}
+.count{margin-top:16px;padding:12px 16px;background:var(--surface);border:1px solid var(--line-strong)}
+.count b{font-family:var(--head);font-size:20px}
+.steps{list-style:none;margin:0 0 32px;padding:0;border-top:1px solid var(--line)}
+.steps li{display:grid;grid-template-columns:40px 1fr;padding:16px 0;border-bottom:1px solid var(--line)}
+.steps b{font-family:var(--head);color:var(--orange-ink)}
+.others{padding:48px 0 96px;border-top:1px solid var(--line)}
+.others h2{font-size:28px;letter-spacing:-.02em;margin-bottom:8px}
+table{width:100%;border-collapse:collapse;margin-top:24px}
+th{font-size:13px;font-weight:500;color:var(--muted);text-align:left;padding:0 16px 8px 0;border-bottom:1px solid var(--fg)}
+td{padding:12px 16px 12px 0;border-bottom:1px solid var(--line);vertical-align:top}
+tr.us td{background:var(--surface);font-weight:500}
+small{color:var(--muted);font-size:13px}
+
+/* ---- The cluttered example. It breaks every rule in DESIGN.md on purpose. ---- */
+.ugly{font:12px/1.3 Arial,Helvetica,sans-serif;color:#e8e8ff;background:linear-gradient(135deg,#1b1147,#3b1d8f 45%,#0d6efd);border-radius:18px;
+  box-shadow:0 18px 50px rgba(80,40,220,.45);overflow:hidden;display:grid;grid-template-columns:150px 1fr;min-height:520px;position:relative}
+.ugly *{border-radius:10px}
+.ugly aside{background:rgba(0,0,0,.35);padding:8px;display:flex;flex-direction:column;gap:3px;border-radius:0}
+.ugly aside b{font-size:14px;padding:6px;background:linear-gradient(90deg,#ff5fd2,#ffb347);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ugly aside button{all:unset;cursor:pointer;padding:5px 8px;font-size:11px;display:flex;justify-content:space-between;gap:4px}
+.ugly aside button:hover,.ugly aside button.on{background:rgba(255,255,255,.16)}
+.ugly .pill{font-size:9px;padding:1px 6px;border-radius:999px;background:#ff3d71;color:#fff}
+.ugly .pill.n{background:#00e0a1;color:#033}
+.ugly main{padding:10px;display:grid;gap:8px;align-content:start}
+.ugly .bar{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.ugly .bar input{all:unset;flex:1;min-width:80px;background:rgba(255,255,255,.14);padding:5px 10px;font-size:11px}
+.ugly .glow{background:linear-gradient(90deg,#ff5fd2,#7b5cff);color:#fff;border:0;padding:6px 10px;font-size:11px;cursor:pointer;box-shadow:0 0 14px #ff5fd2}
+.ugly .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.ugly .kpi{background:rgba(255,255,255,.12);backdrop-filter:blur(6px);padding:8px;text-align:center}
+.ugly .kpi b{display:block;font-size:17px;background:linear-gradient(90deg,#7bffd4,#7bb8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ugly .grid2{display:grid;grid-template-columns:1.2fr 1fr;gap:8px}
+.ugly .card{background:rgba(255,255,255,.1);padding:8px;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+.ugly .card h4{margin:0 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#b9b4ff}
+.ugly .chart{display:flex;align-items:flex-end;gap:4px;height:70px}
+.ugly .chart i{flex:1;background:linear-gradient(#ff5fd2,#7b5cff);animation:bounce 1.6s cubic-bezier(.3,1.8,.5,1) infinite alternate}
+@keyframes bounce{to{transform:scaleY(.55)}}
+.ugly .chart i{transform-origin:bottom}
+.ugly .setup li{display:flex;gap:6px;align-items:center;padding:2px 0;list-style:none}
+.ugly .setup{margin:0;padding:0}
+.ugly .setup span{width:12px;height:12px;border:1px solid #b9b4ff;border-radius:50%;flex:none}
+.ugly .tog{display:flex;justify-content:space-between;padding:3px 0}
+.ugly .sw{width:26px;height:14px;background:#7b5cff;border-radius:999px;position:relative;cursor:pointer}
+.ugly .sw::after{content:"";position:absolute;top:2px;left:2px;width:10px;height:10px;background:#fff;border-radius:50%;transition:left .4s cubic-bezier(.3,1.8,.5,1)}
+.ugly .sw.on::after{left:14px}
+.ugly .form{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px}
+.ugly .form input,.ugly .form select{all:unset;background:rgba(255,255,255,.14);padding:4px 6px;font-size:10px;min-width:0}
+.ugly .modal{position:absolute;right:12px;bottom:12px;width:210px;background:#fff;color:#222;padding:10px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.ugly .modal b{color:#7b5cff}
+.ugly .modal button{all:unset;cursor:pointer;margin-top:6px;margin-right:6px;padding:4px 8px;background:#eee;font-size:10px}
+.ugly .spark{animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.ugly .chart i,.ugly .spark{animation:none}}
+@media (max-width:600px){.ugly{grid-template-columns:104px 1fr}.ugly .kpis{grid-template-columns:repeat(2,1fr)}.ugly .grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="top"><div class="mark">Lobsta</div><a href="/">Open the app</a><a href="/sheet">The books</a></header>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>Other inventory tools want an afternoon of setup. Lobsta wants one photo.</h1>
+    <p>A small restaurant owner already gets a paper invoice with every delivery. That invoice is the only input Lobsta needs.</p>
+    <div><a class="btn" href="/">Snap an invoice</a></div>
+  </div>
+
+  <div class="split">
+    <section aria-labelledby="u">
+      <p class="tag">The usual way</p>
+      <h2 id="u">Try to enter one invoice here</h2>
+      <p class="sub">This is a made-up example of typical restaurant back-office software, not a real product. Every menu and switch works. None of them reads your invoice.</p>
+
+      <div class="ugly" id="ugly" aria-label="Made-up example of cluttered inventory software">
+        <aside>
+          <b>✨ StockMaster Pro AI</b>
+          <button class="on">Dashboard <span class="pill">12</span></button><button>Vendors</button><button>Items &amp; SKUs <span class="pill n">NEW</span></button>
+          <button>Units of measure</button><button>Recipes</button><button>Sub-recipes</button><button>Par levels</button><button>Count sheets</button>
+          <button>Purchase orders</button><button>Receiving</button><button>Invoices <span class="pill">3</span></button><button>GL codes</button>
+          <button>Variance</button><button>Waste log</button><button>Integrations</button><button>AI Insights <span class="pill n">BETA</span></button><button>Settings</button>
+        </aside>
+        <main>
+          <div class="bar"><input placeholder="Search 14 modules…" aria-label="Search"><button class="glow">+ Quick add ▾</button><button class="glow spark">✨ Ask AI</button></div>
+          <div class="kpis">
+            <div class="kpi"><b>31.4%</b>Food cost</div><div class="kpi"><b>$12.8k</b>On hand</div><div class="kpi"><b>-2.1%</b>Variance</div><div class="kpi"><b>87</b>AI score</div>
+          </div>
+          <div class="grid2">
+            <div class="card"><h4 id="uTitle">Dashboard</h4><div class="chart"><i style="height:40%"></i><i style="height:70%;animation-delay:.2s"></i><i style="height:55%;animation-delay:.4s"></i><i style="height:90%;animation-delay:.1s"></i><i style="height:60%;animation-delay:.5s"></i><i style="height:80%;animation-delay:.3s"></i><i style="height:45%;animation-delay:.6s"></i></div></div>
+            <div class="card"><h4>Setup: step 1 of 9</h4><ul class="setup">
+              <li><span></span>Import vendor catalog (CSV)</li><li><span></span>Map 240 SKUs to units</li><li><span></span>Enter every recipe</li><li><span></span>Set par levels</li><li><span></span>Assign GL codes</li><li><span></span>Connect POS</li></ul></div>
+          </div>
+          <div class="card"><h4>New invoice (manual entry)</h4><div class="form">
+            <select aria-label="Vendor"><option>Select vendor…</option></select><input placeholder="Invoice #"><input placeholder="Date">
+            <select aria-label="SKU"><option>Select SKU…</option></select><input placeholder="Qty"><select aria-label="Unit"><option>UoM…</option></select>
+            <input placeholder="Unit price"><select aria-label="GL code"><option>GL code…</option></select><input placeholder="Tax code"></div></div>
+          <div class="card"><h4>Notifications</h4>
+            <div class="tog">Smart reorder AI<div class="sw on"></div></div><div class="tog">Weekly variance email<div class="sw"></div></div><div class="tog">Gamified count streaks<div class="sw on"></div></div></div>
+        </main>
+        <div class="modal" id="uModal"><b>🎉 What's new in 9.2!</b><br>Animated dashboards, AI score and 3 more modules.<br><button>Take the tour</button><button>Remind me later</button></div>
+      </div>
+      <p class="count">Clicks so far: <b id="clicks">0</b>. Invoices entered: <b>0</b>.</p>
+    </section>
+
+    <section aria-labelledby="l">
+      <p class="tag">Lobsta</p>
+      <h2 id="l">Three steps, and the first one is a photo</h2>
+      <p class="sub">No catalog to import, no recipes to type, no codes to assign. Each restaurant is one small config file, set up once.</p>
+      <ol class="steps">
+        <li><b>1</b><span>Photograph the supplier's invoice. A vision model copies what is printed.</span></li>
+        <li><b>2</b><span>Plain code checks every line, converts to cost per kg, and compares with your past invoices. It flags overcharges, price jumps and shrinking packs in your language.</span></li>
+        <li><b>3</b><span>Tap confirm. Only then is anything saved. Ask the front desk what's left or what to order.</span></li>
+      </ol>
+      <a class="btn" href="/">Open Lobsta</a>
+    </section>
+  </div>
+
+  <section class="others" aria-labelledby="o">
+    <h2 id="o">What the established tools cost</h2>
+    <p>These are capable products built for restaurant groups with a back office. Published prices, checked 15 November 2026; they vary by source and plan.</p>
+    <table>
+      <thead><tr><th>Product</th><th>Published starting price</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>MarketMan</td><td>About $199–239 per location per month, plus a reported one-time setup fee of $500</td><td><a href="https://www.g2.com/products/marketman/pricing">G2</a></td></tr>
+        <tr><td>MarginEdge</td><td>About $300–330 per location per month</td><td><a href="https://www.capterra.com/p/187718/MarginEdge/pricing/">Capterra</a></td></tr>
+        <tr><td>Restaurant365</td><td>About $469–499 per location per month</td><td><a href="https://www.restaurant365.com/blog/restaurant-operations-platform-cost-comparison-r365-vs-alternatives/">Restaurant365</a></td></tr>
+        <tr class="us"><td>Lobsta</td><td>Open source. Runs on one open vision model you can host yourself.</td><td><a href="/">This demo</a></td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:16px"><small>Lobsta is a hackathon prototype and does far less than these products. The comparison is about how much an owner must set up before the first useful answer.</small></p>
+  </section>
+</div>
+</div>
+<script>
+const box = document.getElementById("ugly"), n = document.getElementById("clicks"); let c = 0;
+box.addEventListener("click", e => {
+  c++; n.textContent = c;
+  const b = e.target.closest("aside button");
+  if (b) { box.querySelectorAll("aside button").forEach(x => x.classList.remove("on")); b.classList.add("on");
+           document.getElementById("uTitle").textContent = b.firstChild.textContent.trim(); }
+  const sw = e.target.closest(".sw"); if (sw) sw.classList.toggle("on");
+  if (e.target.closest("#uModal button")) { const m = document.getElementById("uModal"); m.hidden = true; setTimeout(() => m.hidden = false, 4000); }
+});
+</script>
+</body>
+</html>

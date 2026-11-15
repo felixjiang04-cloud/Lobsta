@@ -9,13 +9,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Schibsted+Grotesk:wght@600&display=swap">
 <style>
 :root{
-  --bg:#FAFAF7; --surface:#F2F1EC; --fg:#151513; --muted:#5E5D58; --line:#DAD9D3; --line-strong:#B9B8B1;
+  --bg:#FFF8F0; --surface:#FDEBD6; --fg:#151513; --muted:#62574B; --line:#EDD9C2; --line-strong:#CDB496; --orange:#F28C28; --orange-ink:#A85400;
   --red:#B8321A; --red-ink:#8F2412; --red-wash:#F7E9E4; --ok:#1E6B3E;
-  --focus:#B8321A;
+  --focus:#A85400;
   --body:"IBM Plex Sans","PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
   --head:"Schibsted Grotesk","IBM Plex Sans","PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
   --ease:cubic-bezier(.2,0,0,1);
-  --hdr:64px;
+  --hdr:68px;
 }
 *,*::before,*::after{box-sizing:border-box;border-radius:0 !important}
 html,body{margin:0}
@@ -30,7 +30,7 @@ button,select,input{font:inherit;color:inherit}
 .muted{color:var(--muted)}
 
 /* top bar */
-.top{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--line);min-height:var(--hdr)}
+.top{border-top:4px solid var(--orange);display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--line);min-height:var(--hdr)}
 .mark{font-family:var(--head);font-weight:600;font-size:20px;letter-spacing:-.01em}
 .biz{color:var(--muted);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .seg{display:flex}
@@ -39,6 +39,7 @@ button,select,input{font:inherit;color:inherit}
 .seg button+button{border-left:0}
 .seg button[aria-pressed=true]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
 .seg button:not([aria-pressed=true]):hover{background:var(--surface)}
+.thumbs button[aria-current=true]{border-color:var(--orange);outline:2px solid var(--orange)}
 select{height:40px;padding:0 32px 0 12px;border:1px solid var(--line-strong);background:var(--bg);font-size:14px;cursor:pointer;
   appearance:none;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23151513' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 12px center}
 select:hover{border-color:var(--fg)}
@@ -48,7 +49,7 @@ select:hover{border-color:var(--fg)}
 main{display:grid;grid-template-columns:1fr}
 .col{padding:24px 16px 32px;border-bottom:1px solid var(--line);min-width:0}
 .step{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
-.step span{font-family:var(--head);font-size:14px;color:var(--muted)}
+.step span{font-family:var(--head);font-size:14px;color:var(--orange-ink);border:1px solid var(--orange);background:var(--surface);min-width:24px;height:24px;display:inline-grid;place-items:center}
 .step h2{font-size:20px}
 @media (min-width:1024px){
   body{padding-bottom:0}
@@ -87,7 +88,7 @@ body.pending .snap:hover{background:var(--fg);color:var(--bg)}
 /* column 2: what was read */
 .how{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
 .how li{display:grid;grid-template-columns:32px 1fr;padding:16px 0;border-bottom:1px solid var(--line)}
-.how b{font-family:var(--head);font-weight:600;color:var(--muted)}
+.how b{font-family:var(--head);font-weight:600;color:var(--orange-ink)}
 .loading{padding:16px 0}
 .track{height:2px;background:var(--line);overflow:hidden;margin-top:12px;max-width:320px}
 .track i{display:block;height:100%;width:40%;background:var(--fg);transform:translateX(-100%)}
@@ -163,6 +164,7 @@ body.pending .snap:hover{background:var(--fg);color:var(--bg)}
   </div>
   <label class="sr" for="profile">Restaurant</label>
   <select id="profile"></select>
+  <a id="whyLink" href="/intro"></a>
   <a id="sheetLink" target="_blank"></a>
 </header>
 
@@ -208,21 +210,21 @@ const S = {
      found:"这张单子多付了",foundSub:"程序算出来的，不是 AI 猜的",date:"日期",no:"单号",by:"读取",sec:"秒",
      item:"货品",qty:"数量",amount:"金额",total:"总计",matched:"对应",which:"选一样货",pick:"这是哪样货？",
      ph:"还剩多少？/ 三文鱼剩八公斤",q:["今天要注意什么？","该订什么？","我买贵了吗？","还剩多少？","这个月花了多少？"],via:{model:"开源模型组织语言，数字由程序核对过",check:"模型改了数字，所以这里显示的是程序的原话"},you:"你",bot:"Lobsta",
-     send:"发短信给 ",to:"发给",sheet:"账本（投影）",voice:"语音",go:"发送",ask:"问 Lobsta",sample:"示例"},
+     send:"发短信给 ",to:"发给",why:"为什么做 Lobsta",sheet:"账本（投影）",voice:"语音",go:"发送",ask:"问 Lobsta",sample:"示例"},
  en:{s1:"Invoice",s2:"What was read",s3:"Front desk",snap:"Snap an invoice",samples:"Or try a sample invoice",
      how:["Take one photo. The AI only reads the text.","Code checks every line and compares prices with what you paid before.","Nothing is saved until you confirm."],
      reading:"Reading the invoice…",checking:"Checking the numbers…",confirm:"Looks right, save it",anyway:"Noted, save anyway",discard:"Discard",
      found:"Overpaid on this invoice",foundSub:"Worked out by code, not guessed by AI",date:"Date",no:"No.",by:"Read by",sec:"s",
      item:"Item",qty:"Qty",amount:"Amount",total:"Total",matched:"Matched to",which:"Pick an item",pick:"Which item is this?",
      ph:"What's left? / salmon 8 kg",q:["Brief me","What should I order?","Am I overpaying?","What's left?","What did I spend this month?"],via:{model:"Worded by the open model; every number checked by code",check:"The model changed a number, so this is the code's own wording"},you:"You",bot:"Lobsta",
-     send:"Text ",to:"To",sheet:"The books (projector)",voice:"Voice",go:"Send",ask:"Ask Lobsta",sample:"Sample"},
+     send:"Text ",to:"To",why:"Why Lobsta",sheet:"The books (projector)",voice:"Voice",go:"Send",ask:"Ask Lobsta",sample:"Sample"},
  fr:{s1:"Facture",s2:"Ce qui a été lu",s3:"Accueil",snap:"Photographier une facture",samples:"Ou essayez une facture d'exemple",
      how:["Une seule photo. L'IA ne fait que lire.","Le code vérifie chaque ligne et compare les prix avec vos achats passés.","Rien n'est enregistré sans votre accord."],
      reading:"Lecture de la facture…",checking:"Vérification des chiffres…",confirm:"C'est bon, enregistrer",anyway:"Noté, enregistrer quand même",discard:"Annuler",
      found:"Payé en trop sur cette facture",foundSub:"Calculé par le code, pas deviné par l'IA",date:"Date",no:"N°",by:"Lu par",sec:" s",
      item:"Article",qty:"Qté",amount:"Montant",total:"Total",matched:"Associé à",which:"Choisir un article",pick:"C'est quel article ?",
      ph:"Il reste combien ? / saumon 8 kg",q:["Résumé du jour","Quoi commander ?","Est-ce que je paie trop cher ?","Il reste combien ?","Combien dépensé ce mois-ci ?"],via:{model:"Formulé par le modèle ouvert ; chaque chiffre vérifié par le code",check:"Le modèle a changé un chiffre : voici la version du code"},you:"Vous",bot:"Lobsta",
-     send:"Texter ",to:"À",sheet:"Les livres (projecteur)",voice:"Voix",go:"Envoyer",ask:"Demander à Lobsta",sample:"Exemple"}
+     send:"Texter ",to:"À",why:"Pourquoi Lobsta",sheet:"Les livres (projecteur)",voice:"Voix",go:"Envoyer",ask:"Demander à Lobsta",sample:"Exemple"}
 };
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -245,7 +247,7 @@ async function load(){
   $("snapLabel").textContent = L.snap; $("samplesLabel").textContent = L.samples;
   $("text").placeholder = L.ph; $("textLabel").textContent = L.ask;
   $("mic").setAttribute("aria-label", L.voice); $("send").setAttribute("aria-label", L.go);
-  $("sheetLink").textContent = L.sheet;
+  $("sheetLink").textContent = L.sheet; $("whyLink").textContent = L.why;
   $("sheetLink").href = "/sheet" + qs();
   $("profile").innerHTML = cfg.profiles.map(p => `<option ${p===cfg.profile?"selected":""}>${esc(p)}</option>`).join("");
   $("demos").innerHTML = cfg.demo.map((n, i) =>
