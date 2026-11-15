@@ -1,0 +1,48 @@
+{
+ "supplier": "Distribution Asie-Québec",
+ "invoice_number": "AQ-728236",
+ "date": "2026-10-09",
+ "language": "en",
+ "currency": "CAD",
+ "lines": [
+  {
+   "code": "R-200",
+   "description": "Calrose rice 20 kg",
+   "quantity": "5",
+   "unit": "sac",
+   "pack": "20 kg",
+   "unit_price": "38.50",
+   "line_total": "192.50"
+  },
+  {
+   "code": "N-050",
+   "description": "Nori sheets 50 ct",
+   "quantity": "17",
+   "unit": "ea",
+   "pack": "",
+   "unit_price": "4.50",
+   "line_total": "76.50"
+  },
+  {
+   "code": "S-180",
+   "description": "Soy sauce 6 x 1.8 L",
+   "quantity": "1",
+   "unit": "case",
+   "pack": "6 x 1.8 L",
+   "unit_price": "43.45",
+   "line_total": "43.45"
+  }
+ ],
+ "subtotal": "312.45",
+ "taxes": [
+  {
+   "name": "GST 5%",
+   "amount": "0.00"
+  },
+  {
+   "name": "QST 9.975%",
+   "amount": "0.00"
+  }
+ ],
+ "total": "312.45"
+}

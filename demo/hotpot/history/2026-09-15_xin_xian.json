@@ -1,0 +1,48 @@
+{
+ "supplier": "新鲜蔬果行 Fruits & Légumes Xin Xian",
+ "invoice_number": "XX-120832",
+ "date": "2026-09-15",
+ "language": "zh",
+ "currency": "CAD",
+ "lines": [
+  {
+   "code": "V01",
+   "description": "大白菜 50磅",
+   "quantity": "1",
+   "unit": "箱",
+   "pack": "50磅",
+   "unit_price": "26.00",
+   "line_total": "26.00"
+  },
+  {
+   "code": "V05",
+   "description": "金针菇 25 x 200g",
+   "quantity": "1",
+   "unit": "箱",
+   "pack": "25 x 200g",
+   "unit_price": "18.00",
+   "line_total": "18.00"
+  },
+  {
+   "code": "T01",
+   "description": "老豆腐 12 x 454g",
+   "quantity": "4",
+   "unit": "箱",
+   "pack": "12 x 454g",
+   "unit_price": "19.15",
+   "line_total": "76.60"
+  }
+ ],
+ "subtotal": "120.60",
+ "taxes": [
+  {
+   "name": "GST",
+   "amount": "0.00"
+  },
+  {
+   "name": "QST",
+   "amount": "0.00"
+  }
+ ],
+ "total": "120.60"
+}

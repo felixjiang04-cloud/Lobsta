@@ -1,0 +1,48 @@
+{
+ "supplier": "Distribution Asie-Québec",
+ "invoice_number": "AQ-352416",
+ "date": "2026-09-25",
+ "language": "fr",
+ "currency": "CAD",
+ "lines": [
+  {
+   "code": "R-200",
+   "description": "Riz Calrose 20 kg",
+   "quantity": "5",
+   "unit": "sac",
+   "pack": "20 kg",
+   "unit_price": "38,50",
+   "line_total": "192,50"
+  },
+  {
+   "code": "N-050",
+   "description": "Nori feuilles 50 un",
+   "quantity": "15",
+   "unit": "un",
+   "pack": "",
+   "unit_price": "4,50",
+   "line_total": "67,50"
+  },
+  {
+   "code": "S-180",
+   "description": "Sauce soya 6 x 1,8 L",
+   "quantity": "3",
+   "unit": "cse",
+   "pack": "6 x 1,8 L",
+   "unit_price": "44,30",
+   "line_total": "132,90"
+  }
+ ],
+ "subtotal": "392,90",
+ "taxes": [
+  {
+   "name": "TPS",
+   "amount": "0,00"
+  },
+  {
+   "name": "TVQ",
+   "amount": "0,00"
+  }
+ ],
+ "total": "392,90"
+}

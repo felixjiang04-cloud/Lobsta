@@ -1,0 +1,48 @@
+{
+ "supplier": "Poissonnerie Baie-Nord inc.",
+ "invoice_number": "683875",
+ "date": "2026-10-20",
+ "language": "fr",
+ "currency": "CAD",
+ "lines": [
+  {
+   "code": "1001",
+   "description": "Saumon atl. frais filet",
+   "quantity": "8,51",
+   "unit": "kg",
+   "pack": "",
+   "unit_price": "17,50",
+   "line_total": "148,92"
+  },
+  {
+   "code": "1014",
+   "description": "Thon albacore saku",
+   "quantity": "5,7",
+   "unit": "kg",
+   "pack": "",
+   "unit_price": "33,65",
+   "line_total": "191,81"
+  },
+  {
+   "code": "1210",
+   "description": "Tobiko orange 500 g",
+   "quantity": "3",
+   "unit": "un.",
+   "pack": "500 g",
+   "unit_price": "21,25",
+   "line_total": "63,75"
+  }
+ ],
+ "subtotal": "404,48",
+ "taxes": [
+  {
+   "name": "TPS 5 %",
+   "amount": "0,00"
+  },
+  {
+   "name": "TVQ 9,975 %",
+   "amount": "0,00"
+  }
+ ],
+ "total": "404,48"
+}

@@ -1,0 +1,48 @@
+{
+ "supplier": "Fruits et Légumes Marché Soleil",
+ "invoice_number": "MS443979",
+ "date": "2026-09-30",
+ "language": "fr",
+ "currency": "CAD",
+ "lines": [
+  {
+   "code": "AV48",
+   "description": "Avocat Hass 48 un",
+   "quantity": "2",
+   "unit": "cse",
+   "pack": "",
+   "unit_price": "46,10",
+   "line_total": "92,20"
+  },
+  {
+   "code": "CC24",
+   "description": "Concombre anglais 12 un",
+   "quantity": "1",
+   "unit": "cs",
+   "pack": "",
+   "unit_price": "22,60",
+   "line_total": "22,60"
+  },
+  {
+   "code": "MG09",
+   "description": "Mangue Ataulfo 4 kg",
+   "quantity": "3",
+   "unit": "cs",
+   "pack": "4 kg",
+   "unit_price": "14,25",
+   "line_total": "42,75"
+  }
+ ],
+ "subtotal": "157,55",
+ "taxes": [
+  {
+   "name": "TPS",
+   "amount": "0,00"
+  },
+  {
+   "name": "TVQ",
+   "amount": "0,00"
+  }
+ ],
+ "total": "157,55"
+}

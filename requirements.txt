@@ -1,0 +1,11 @@
+# the app
+fastapi
+uvicorn
+python-multipart
+httpx
+pillow
+numpy
+anthropic          # reader + front desk agent (optional: the demo invoices run without it)
+gspread            # optional: mirror confirmed invoices to the owner's Google Sheet
+pytest
+# training (install on the GPU box only):  pip install unsloth

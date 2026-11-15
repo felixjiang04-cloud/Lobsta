@@ -1,0 +1,48 @@
+{
+ "supplier": "龙记干货 Épicerie en gros Long Ji",
+ "invoice_number": "LJ107203",
+ "date": "2026-09-26",
+ "language": "en",
+ "currency": "CAD",
+ "lines": [
+  {
+   "code": "B01",
+   "description": "Spicy hotpot base 40 x 200g",
+   "quantity": "2",
+   "unit": "case",
+   "pack": "40 x 200g",
+   "unit_price": "77.90",
+   "line_total": "155.80"
+  },
+  {
+   "code": "N02",
+   "description": "Wide glass noodle 30 x 400g",
+   "quantity": "3",
+   "unit": "case",
+   "pack": "30 x 400g",
+   "unit_price": "34.30",
+   "line_total": "102.90"
+  },
+  {
+   "code": "O20",
+   "description": "Cooking oil 20 L",
+   "quantity": "1",
+   "unit": "each",
+   "pack": "20 L",
+   "unit_price": "46.00",
+   "line_total": "46.00"
+  }
+ ],
+ "subtotal": "304.70",
+ "taxes": [
+  {
+   "name": "GST 5%",
+   "amount": "0.00"
+  },
+  {
+   "name": "QST 9.975%",
+   "amount": "0.00"
+  }
+ ],
+ "total": "304.70"
+}

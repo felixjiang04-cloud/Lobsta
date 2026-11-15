@@ -1,0 +1,48 @@
+{
+ "supplier": "鸿运食品批发 Hong Yun Foods",
+ "invoice_number": "358356",
+ "date": "2026-09-08",
+ "language": "zh",
+ "currency": "CAD",
+ "lines": [
+  {
+   "code": "F01",
+   "description": "肥牛卷",
+   "quantity": "34.26",
+   "unit": "磅",
+   "pack": "",
+   "unit_price": "6.80",
+   "line_total": "232.97"
+  },
+  {
+   "code": "F02",
+   "description": "羊肉卷",
+   "quantity": "22.05",
+   "unit": "磅",
+   "pack": "",
+   "unit_price": "8.30",
+   "line_total": "183.02"
+  },
+  {
+   "code": "S10",
+   "description": "鱼丸 10 x 500g",
+   "quantity": "4",
+   "unit": "箱",
+   "pack": "10 x 500g",
+   "unit_price": "36.50",
+   "line_total": "146.00"
+  }
+ ],
+ "subtotal": "561.99",
+ "taxes": [
+  {
+   "name": "GST",
+   "amount": "0.00"
+  },
+  {
+   "name": "QST",
+   "amount": "0.00"
+  }
+ ],
+ "total": "561.99"
+}

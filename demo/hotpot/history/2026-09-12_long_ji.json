@@ -1,0 +1,48 @@
+{
+ "supplier": "龙记干货 Épicerie en gros Long Ji",
+ "invoice_number": "947444",
+ "date": "2026-09-12",
+ "language": "zh",
+ "currency": "CAD",
+ "lines": [
+  {
+   "code": "B01",
+   "description": "麻辣火锅底料 40 x 200g",
+   "quantity": "3",
+   "unit": "箱",
+   "pack": "40 x 200g",
+   "unit_price": "77.90",
+   "line_total": "233.70"
+  },
+  {
+   "code": "N02",
+   "description": "宽粉 30 x 400g",
+   "quantity": "2",
+   "unit": "箱",
+   "pack": "30 x 400g",
+   "unit_price": "33.35",
+   "line_total": "66.70"
+  },
+  {
+   "code": "O20",
+   "description": "食用油 20 L",
+   "quantity": "2",
+   "unit": "个",
+   "pack": "20 L",
+   "unit_price": "46.90",
+   "line_total": "93.80"
+  }
+ ],
+ "subtotal": "394.20",
+ "taxes": [
+  {
+   "name": "GST",
+   "amount": "0.00"
+  },
+  {
+   "name": "QST",
+   "amount": "0.00"
+  }
+ ],
+ "total": "394.20"
+}

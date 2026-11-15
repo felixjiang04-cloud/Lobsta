@@ -1,0 +1,39 @@
+{
+  "profile": "hotpot",
+  "business": "麻辣烫 Demo Malatang",
+  "owner_language": "zh",
+  "invoice_languages": ["zh", "en"],
+  "usage_source": "voice_count",
+  "delivery_days": ["mon", "thu"],
+  "order_lead_days": 1,
+  "safety_pct": 20,
+  "alerts": {"price_jump_pct": 8, "shrink_pct": 3},
+  "suppliers": [
+    {"name": "鸿运食品批发 Hong Yun Foods", "phone": "+15145550188", "language": "zh"},
+    {"name": "新鲜蔬果行 Fruits & Légumes Xin Xian", "phone": "+15145550131", "language": "zh"},
+    {"name": "龙记干货 Épicerie en gros Long Ji", "phone": "+14505550164", "language": "zh"}
+  ],
+  "items": [
+    {"key": "beef_roll", "name": {"en": "Beef rolls", "fr": "Boeuf tranché", "zh": "肥牛卷"}, "base_unit": "kg", "par": 30, "daily_use": 6, "order_pack": 5, "supplier": "鸿运食品批发 Hong Yun Foods", "keywords": ["肥牛", "beef roll", "beef"]},
+    {"key": "lamb_roll", "name": {"en": "Lamb rolls", "fr": "Agneau tranché", "zh": "羊肉卷"}, "base_unit": "kg", "par": 20, "daily_use": 3.5, "order_pack": 5, "supplier": "鸿运食品批发 Hong Yun Foods", "keywords": ["羊肉", "lamb"]},
+    {"key": "tripe", "name": {"en": "Beef tripe", "fr": "Tripes", "zh": "牛百叶"}, "base_unit": "kg", "par": 8, "supplier": "鸿运食品批发 Hong Yun Foods", "keywords": ["百叶", "毛肚", "tripe"]},
+    {"key": "shrimp_paste", "name": {"en": "Shrimp paste", "fr": "Pâte de crevette", "zh": "虾滑"}, "base_unit": "kg", "par": 6, "supplier": "鸿运食品批发 Hong Yun Foods", "keywords": ["虾滑", "shrimp paste"]},
+    {"key": "fish_ball", "name": {"en": "Fish balls", "fr": "Boulettes de poisson", "zh": "鱼丸"}, "base_unit": "kg", "par": 10, "daily_use": 1.5, "count_units": {"case": 5}, "supplier": "鸿运食品批发 Hong Yun Foods", "keywords": ["鱼丸", "fish ball"]},
+    {"key": "duck_blood", "name": {"en": "Duck blood", "fr": "Sang de canard", "zh": "鸭血"}, "base_unit": "kg", "par": 7, "supplier": "鸿运食品批发 Hong Yun Foods", "keywords": ["鸭血", "duck blood"]},
+    {"key": "luncheon", "name": {"en": "Luncheon meat", "fr": "Viande en conserve", "zh": "午餐肉"}, "base_unit": "kg", "par": 8, "supplier": "鸿运食品批发 Hong Yun Foods", "keywords": ["午餐肉", "luncheon"]},
+    {"key": "napa", "name": {"en": "Napa cabbage", "fr": "Chou nappa", "zh": "大白菜"}, "base_unit": "kg", "par": 45, "daily_use": 9, "order_pack": 22.68, "count_units": {"case": 22.68}, "supplier": "新鲜蔬果行 Fruits & Légumes Xin Xian", "keywords": ["白菜", "napa"]},
+    {"key": "enoki", "name": {"en": "Enoki", "fr": "Enoki", "zh": "金针菇"}, "base_unit": "kg", "par": 10, "daily_use": 2, "order_pack": 5, "count_units": {"case": 5}, "supplier": "新鲜蔬果行 Fruits & Légumes Xin Xian", "keywords": ["金针菇", "enoki"]},
+    {"key": "potato", "name": {"en": "Potato", "fr": "Pomme de terre", "zh": "土豆"}, "base_unit": "kg", "par": 22, "count_units": {"bag": 22.68}, "supplier": "新鲜蔬果行 Fruits & Légumes Xin Xian", "keywords": ["土豆", "potato"]},
+    {"key": "lotus", "name": {"en": "Lotus root", "fr": "Racine de lotus", "zh": "莲藕"}, "base_unit": "kg", "par": 10, "supplier": "新鲜蔬果行 Fruits & Légumes Xin Xian", "keywords": ["莲藕", "藕", "lotus"]},
+    {"key": "bean_sprout", "name": {"en": "Bean sprouts", "fr": "Fèves germées", "zh": "豆芽"}, "base_unit": "kg", "par": 9, "count_units": {"bag": 4.54}, "supplier": "新鲜蔬果行 Fruits & Légumes Xin Xian", "keywords": ["豆芽", "bean sprout"]},
+    {"key": "cilantro", "name": {"en": "Cilantro", "fr": "Coriandre", "zh": "香菜"}, "base_unit": "case", "par": 1, "supplier": "新鲜蔬果行 Fruits & Légumes Xin Xian", "keywords": ["香菜", "cilantro"]},
+    {"key": "tofu", "name": {"en": "Tofu", "fr": "Tofu", "zh": "豆腐"}, "base_unit": "kg", "par": 11, "daily_use": 2, "count_units": {"case": 5.45}, "supplier": "新鲜蔬果行 Fruits & Légumes Xin Xian", "keywords": ["豆腐", "tofu"]},
+    {"key": "soup_base", "name": {"en": "Hotpot base", "fr": "Base de fondue", "zh": "火锅底料"}, "base_unit": "kg", "par": 16, "daily_use": 2, "order_pack": 8, "count_units": {"case": 8}, "supplier": "龙记干货 Épicerie en gros Long Ji", "keywords": ["底料", "hotpot base", "soup base"]},
+    {"key": "wide_noodle", "name": {"en": "Wide noodles", "fr": "Nouilles larges", "zh": "宽粉"}, "base_unit": "kg", "par": 12, "supplier": "龙记干货 Épicerie en gros Long Ji", "keywords": ["宽粉", "glass noodle", "noodle"]},
+    {"key": "yuba", "name": {"en": "Bean curd stick", "fr": "Yuba", "zh": "腐竹"}, "base_unit": "kg", "par": 5, "supplier": "龙记干货 Épicerie en gros Long Ji", "keywords": ["腐竹", "bean curd stick", "yuba"]},
+    {"key": "sesame_paste", "name": {"en": "Sesame paste", "fr": "Pâte de sésame", "zh": "芝麻酱"}, "base_unit": "kg", "par": 5, "supplier": "龙记干货 Épicerie en gros Long Ji", "keywords": ["芝麻酱", "麻酱", "sesame paste"]},
+    {"key": "chili", "name": {"en": "Dried chili", "fr": "Piment séché", "zh": "干辣椒"}, "base_unit": "kg", "par": 2, "supplier": "龙记干货 Épicerie en gros Long Ji", "keywords": ["辣椒", "chili"]},
+    {"key": "oil", "name": {"en": "Cooking oil", "fr": "Huile", "zh": "食用油"}, "base_unit": "l", "par": 40, "supplier": "龙记干货 Épicerie en gros Long Ji", "keywords": ["食用油", "油", "cooking oil"]},
+    {"key": "napkins", "name": {"en": "Napkins", "fr": "Serviettes", "zh": "餐巾纸"}, "base_unit": "case", "par": 1, "supplier": "龙记干货 Épicerie en gros Long Ji", "keywords": ["餐巾纸", "纸巾", "napkin"]}
+  ]
+}

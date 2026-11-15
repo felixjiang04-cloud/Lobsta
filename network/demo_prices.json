@@ -1,0 +1,26 @@
+{
+  "note": "SIMULATED data for the demo. In production this file is replaced by an index built from every confirmed invoice across the shops using Lobsta (medians only, never a named shop's price).",
+  "simulated": true,
+  "shops": 12,
+  "area": "Montreal",
+  "prices": {
+    "salmon":     {"per": "kg",   "p25": 17.10, "median": 18.10, "p75": 19.40},
+    "tuna":       {"per": "kg",   "p25": 32.50, "median": 34.20, "p75": 36.00},
+    "tobiko":     {"per": "kg",   "p25": 41.00, "median": 44.00, "p75": 47.00},
+    "rice":       {"per": "kg",   "p25": 1.85,  "median": 1.95,  "p75": 2.05},
+    "nori":       {"per": "ea",   "p25": 4.20,  "median": 4.40,  "p75": 4.70},
+    "soy_sauce":  {"per": "l",    "p25": 3.90,  "median": 4.20,  "p75": 4.50},
+    "avocado":    {"per": "case", "p25": 42.00, "median": 44.00, "p75": 48.00},
+    "cucumber":   {"per": "case", "p25": 21.00, "median": 23.00, "p75": 25.00},
+    "mango":      {"per": "kg",   "p25": 3.30,  "median": 3.60,  "p75": 3.90},
+    "beef_roll":  {"per": "kg",   "p25": 14.60, "median": 15.40, "p75": 16.30},
+    "lamb_roll":  {"per": "kg",   "p25": 16.90, "median": 17.60, "p75": 18.70},
+    "fish_ball":  {"per": "kg",   "p25": 6.80,  "median": 7.30,  "p75": 7.90},
+    "napa":       {"per": "kg",   "p25": 1.02,  "median": 1.10,  "p75": 1.20},
+    "enoki":      {"per": "kg",   "p25": 3.30,  "median": 3.50,  "p75": 3.80},
+    "tofu":       {"per": "kg",   "p25": 3.20,  "median": 3.40,  "p75": 3.70},
+    "soup_base":  {"per": "kg",   "p25": 9.30,  "median": 9.90,  "p75": 10.60},
+    "wide_noodle":{"per": "kg",   "p25": 2.70,  "median": 2.90,  "p75": 3.10},
+    "oil":        {"per": "l",    "p25": 2.15,  "median": 2.30,  "p75": 2.50}
+  }
+}

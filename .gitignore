@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+*.db
+uploads/
+data/
+runs/
+report/
+.env
+*.read.json
+service-account*.json
+
+# only the two demo restaurants are public; real restaurants' configs stay private
+configs/*
+!configs/sushi.json
+!configs/hotpot.json
+invoice*/
+lobsta_update/
+lobsta_update.zip
+*.zip
