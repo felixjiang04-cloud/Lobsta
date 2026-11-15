@@ -4,6 +4,7 @@ uvicorn
 python-multipart
 httpx
 pillow
+openpyxl           # the "Download as Excel" button on the books page
 numpy
 anthropic          # reader + front desk agent (optional: the demo invoices run without it)
 gspread            # optional: mirror confirmed invoices to the owner's Google Sheet

@@ -26,6 +26,8 @@ a{color:inherit;text-decoration:underline;text-underline-offset:3px;text-decorat
 .lob{width:24px;height:24px;vertical-align:middle;margin-right:8px;flex:none}
 .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:16px}
 .legend img{width:20px;height:20px;margin-right:4px}
+.dl{display:inline-flex;align-items:center;height:40px;padding:0 16px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);font-weight:600;font-size:14px;text-decoration:none;transition:background-color .15s var(--ease),color .15s var(--ease)}
+.dl:hover{background:transparent;color:var(--fg)}
 .seg{display:flex}
 .seg button{height:40px;min-width:48px;padding:0 12px;border:1px solid var(--line-strong);background:transparent;cursor:pointer;font:inherit;font-size:14px;color:inherit}
 .seg button+button{border-left:0}
@@ -61,6 +63,7 @@ tr.new td{background:var(--new)}
   <div class="seg" id="langs" role="group" aria-label="Language">
     <button data-l="zh" lang="zh">中文</button><button data-l="en" lang="en">EN</button><button data-l="fr" lang="fr">FR</button>
   </div>
+  <a class="dl" id="dl"></a>
   <a id="back"></a>
 </header>
 <div class="sum">
@@ -80,15 +83,15 @@ tr.new td{background:var(--new)}
 const T = {
  zh:{inv:"张单子已入账",tot:"进货总额",p:"进货记录",pn:"老板在手机上确认后，由程序写入。",s:"库存",sn:"根据盘点和用量估算。",
      cols:["日期","供应商","货品","单子原文","数量","单价","金额","成本"],scols:["货品","现有","够几天"],
-     empty:"还没有入账。在手机上确认一张单子。",nostock:"还没有盘点。",back:"手机页面",lv:{red:"快用完了",yellow:"快要不够",blue:"够用"},
+     empty:"还没有入账。在手机上确认一张单子。",nostock:"还没有盘点。",dl:"下载 Excel",back:"手机页面",lv:{red:"快用完了",yellow:"快要不够",blue:"够用"},
      sheet:"同步到老板的 Google 表格：",open:"打开",local:"本地存储。设置 LOBSTA_SHEET_ID 可同步到 Google 表格。"},
  en:{inv:"invoices saved",tot:"purchases recorded",p:"Purchases",pn:"Written by code after the owner confirms on the phone.",s:"Stock",sn:"From closing counts and daily use.",
      cols:["Date","Supplier","Item","As printed","Qty","Price","Total","Cost"],scols:["Item","On hand","Days left"],
-     empty:"Nothing saved yet. Confirm an invoice on the phone.",nostock:"No counts yet.",back:"Phone page",lv:{red:"Low: order now",yellow:"Getting low",blue:"Enough"},
+     empty:"Nothing saved yet. Confirm an invoice on the phone.",nostock:"No counts yet.",dl:"Download as Excel",back:"Phone page",lv:{red:"Low: order now",yellow:"Getting low",blue:"Enough"},
      sheet:"Mirrored to the owner's Google Sheet: ",open:"open it",local:"Local store. Set LOBSTA_SHEET_ID to mirror every confirmed invoice to a Google Sheet."},
  fr:{inv:"factures enregistrées",tot:"achats enregistrés",p:"Achats",pn:"Écrits par le code après confirmation sur le téléphone.",s:"Stock",sn:"D'après les comptages et la consommation.",
      cols:["Date","Fournisseur","Article","Tel qu'imprimé","Qté","Prix","Total","Coût"],scols:["Article","En stock","Jours"],
-     empty:"Rien d'enregistré. Confirmez une facture sur le téléphone.",nostock:"Aucun comptage.",back:"Page téléphone",lv:{red:"Bas : commander",yellow:"Bientôt bas",blue:"Suffisant"},
+     empty:"Rien d'enregistré. Confirmez une facture sur le téléphone.",nostock:"Aucun comptage.",dl:"Télécharger en Excel",back:"Page téléphone",lv:{red:"Bas : commander",yellow:"Bientôt bas",blue:"Suffisant"},
      sheet:"Copié dans la feuille Google du propriétaire : ",open:"ouvrir",local:"Stockage local. Définissez LOBSTA_SHEET_ID pour copier chaque facture dans Google Sheets."}
 };
 const $ = id => document.getElementById(id);
@@ -110,6 +113,7 @@ function labels(){
   $("sHead").innerHTML = L.scols.map((c, i) => `<th class="${i ? "r" : ""}">${esc(c)}</th>`).join("");
   $("legend").innerHTML = ["red", "yellow", "blue"].map(k => `<span><img class="lob" src="/logo/lobsta_mark${k === "blue" ? "" : "_" + k}.svg" alt="" width="20" height="20">${esc(L.lv[k])}</span>`).join("");
   $("empty").textContent = L.empty; $("noStock").textContent = L.nostock;
+  $("dl").textContent = L.dl; $("dl").href = "/api/export.xlsx" + qs();
   $("back").textContent = L.back; $("back").href = "/" + (P ? "?p=" + encodeURIComponent(P) + "&l=" + lang : "?l=" + lang);
 }
 $("langs").onclick = e => { const b = e.target.closest("button"); if (!b) return; lang = b.dataset.l; store.set("lobsta.lang", lang); labels(); tick(); };

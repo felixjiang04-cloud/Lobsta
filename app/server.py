@@ -13,7 +13,7 @@ from datetime import date
 from pathlib import Path
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
@@ -178,6 +178,51 @@ def api_alerts(p: str | None = None, lang: str | None = None):
     low = [{"item": item_name(cfg, l["item_key"]), "on_hand": l["on_hand"], "unit": i18n.unit_word(l["unit"], L, l["on_hand"]),
             "days_left": l["days_left"], "order": i18n.order_text(l, L)} for l in plan["lines"]]
     return {"next_delivery": plan["next_delivery"], "low": low, "drafts": drafts}
+
+
+@app.get("/api/export.xlsx")
+def api_export(p: str | None = None, lang: str | None = None):
+    """The whole ledger as one Excel file the owner can open, check and correct: purchases, stock, counts."""
+    from io import BytesIO
+    from openpyxl import Workbook
+    from openpyxl.styles import Font
+    cfg, store = ctx(p, lang)
+    L = cfg["owner_language"]
+    wb = Workbook()
+
+    def sheet(ws, title, head, rows, widths):
+        ws.title = title
+        ws.append(head)
+        for c in ws[1]:
+            c.font = Font(bold=True)
+        for r in rows:
+            ws.append(r)
+        ws.freeze_panes = "A2"
+        for i, w in enumerate(widths):
+            ws.column_dimensions[chr(65 + i)].width = w
+
+    lines = store.db.execute(
+        "select date, supplier, invoice_id, item_key, description, quantity, unit, unit_price, line_total, unit_cost, cost_per"
+        " from lines order by date desc, invoice_id desc, n asc").fetchall()
+    sheet(wb.active, "Purchases",
+          ["Date", "Supplier", "Invoice id", "Item", "As printed", "Qty", "Unit", "Unit price", "Line total", "Cost per unit", "Per"],
+          [[r["date"], r["supplier"], r["invoice_id"], item_name(cfg, r["item_key"]) if r["item_key"] else "", r["description"],
+            r["quantity"], i18n.unit_word(r["unit"], L, r["quantity"]), r["unit_price"], r["line_total"], r["unit_cost"],
+            i18n.unit_word(r["cost_per"], L)] for r in lines],
+          [12, 34, 10, 20, 34, 8, 8, 11, 11, 13, 8])
+    lv = stock.levels(cfg, store, today())
+    st = [s for s in (stock.status(it, store, today()) for it in cfg["items"]) if s["on_hand"] is not None]
+    sheet(wb.create_sheet(), "Stock", ["Item", "On hand", "Unit", "Use per day", "Days left", "Level"],
+          [[item_name(cfg, s["item_key"]), s["on_hand"], i18n.unit_word(s["unit"], L, s["on_hand"]), s["use_per_day"],
+            s["days_left"], lv.get(s["item_key"], "")] for s in st], [22, 10, 8, 12, 10, 10])
+    counts = store.db.execute("select date, item_key, qty, created from counts order by date desc, created desc").fetchall()
+    sheet(wb.create_sheet(), "Counts", ["Date", "Item", "Counted", "Recorded at"],
+          [[r["date"], item_name(cfg, r["item_key"]), r["qty"], r["created"]] for r in counts], [12, 22, 10, 20])
+    buf = BytesIO()
+    wb.save(buf)
+    name = f"lobsta_{cfg['profile']}_{today().isoformat()}.xlsx"
+    return Response(buf.getvalue(), media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    headers={"Content-Disposition": f'attachment; filename="{name}"'})
 
 
 @app.post("/api/reset")
